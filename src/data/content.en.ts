@@ -59,11 +59,13 @@ export const en = {
       'I run production-scale Proxmox and Docker infrastructure, and I own the defence layers that reach from pre-commit to runtime along with the GitOps-based CI/CD pipelines that carry them. My focus is secure software delivery (SAST/SCA/SBOM, signed images), durable operations (SLOs, blameless postmortems, runbook hygiene) and an offensive mindset.',
     locationLabel: 'Location',
     location: 'Türkiye · Remote (UTC+3)',
+    nowHeading: 'Now',
+    roleLabel: 'Role',
+    companyLabel: 'Company',
+    prepLabel: 'In preparation',
     ctaGithub: 'GitHub',
     ctaLinkedin: 'LinkedIn',
     ctaCv: 'Download CV',
-    statusLabel: 'Languages',
-    statusValue: 'Turkish · English (B1–B2)',
   },
 
   about: {
@@ -71,7 +73,7 @@ export const en = {
     paragraphs: [
       'At Ayssoft I am the company’s only DevOps engineer: the entire delivery chain from commit to production is mine. I have provisioned and now operate more than 100 virtual machines across multiple Proxmox nodes, and over 90 container-based repositories are built and deployed with GitHub Actions.',
       'I came to infrastructure from full-stack Java and React development, and that shapes how I work: I build hardening, secret management and observability that development teams adopt rather than route around.',
-      'I lead production incident response — Proxmox LVM thin-pool exhaustion, Redis AOF corruption, MySQL 8 physical restores, Kafka offset recovery, multi-tenant Docker stack failures. I am currently preparing for OSCP+, CKA and CKS.',
+      'I lead production incident response — Proxmox LVM thin-pool exhaustion, Redis AOF corruption, MySQL 8 physical restores, Kafka offset recovery, multi-tenant Docker stack failures. I am currently preparing for OSCP+ and CKS.',
     ],
     languagesLabel: 'Languages',
     languages: ['Turkish — native', 'English — CEFR B1–B2'],
@@ -150,7 +152,7 @@ export const en = {
       },
       'devsecops-handbook': {
         tagline:
-          'A Turkish DevOps · DevSecOps · SRE · Platform Engineering reference book. 21 topics, 125+ deep dives, 9 cheatsheets, 25+ production-ready templates, 65K+ lines — Kubernetes, Terraform, GitOps, FinOps, Observability, LLMOps, KVKK/GDPR.',
+          'A bilingual (TR/EN) DevOps · DevSecOps · SRE · Platform Engineering reference book. 21 topics, 134 deep-dive documents, ~85K lines, production checklists and a 28-day AWS + Terraform + EKS implementation guide — Kubernetes, GitOps, FinOps, Observability, LLMOps, KVKK/GDPR.',
       },
       'databases-stack': {
         tagline:
@@ -263,7 +265,6 @@ export const en = {
       'As manager I planned the community’s annual activity programme, coordinated the board, represented the community within the university, and ran hands-on technical workshops introducing students to security fundamentals. I handed the role over in September 2026 and continue to support the community remotely.',
     certifications: [
       { name: 'OSCP+', full: 'OffSec Certified Professional' },
-      { name: 'CKA', full: 'Certified Kubernetes Administrator' },
       { name: 'CKS', full: 'Certified Kubernetes Security Specialist' },
     ],
   },

@@ -59,11 +59,13 @@ export const tr = {
       'Production ölçekli Proxmox ve Docker altyapılarını işleten, pre-commit’ten runtime’a uzanan savunma katmanlarını ve GitOps tabanlı CI/CD hatlarını uçtan uca sahiplenen bir mühendisim. Odağım güvenli yazılım teslimi (SAST/SCA/SBOM, imzalı imaj), dayanıklı operasyon (SLO, suçlusuz postmortem, runbook hijyeni) ve ofansif bakış açısı.',
     locationLabel: 'Konum',
     location: 'Türkiye · Remote (UTC+3)',
+    nowHeading: 'Şu an',
+    roleLabel: 'Rol',
+    companyLabel: 'Şirket',
+    prepLabel: 'Hazırlık',
     ctaGithub: 'GitHub',
     ctaLinkedin: 'LinkedIn',
     ctaCv: 'CV indir',
-    statusLabel: 'Dil',
-    statusValue: 'Türkçe · İngilizce (B1–B2)',
   },
 
   about: {
@@ -71,7 +73,7 @@ export const tr = {
     paragraphs: [
       'Ayssoft’ta şirketin tek DevOps mühendisiyim: commit’ten production’a kadar bütün teslim zinciri bende. Çoklu Proxmox node üzerinde bugüne kadar 100’den fazla sanal makine kurdum ve işletiyorum; 90’dan fazla container tabanlı repository GitHub Actions ile build edilip dağıtılıyor.',
       'Altyapıya full-stack Java ve React geliştiriciliğinden geldim. Bu, nasıl çalıştığımı belirliyor: geliştirme ekiplerinin etrafından dolaşacağı değil, benimseyeceği sertleştirme, secret yönetimi ve gözlemlenebilirlik kuruyorum.',
-      'Üretim olaylarına müdahaleyi ben yürütüyorum — Proxmox LVM thin-pool tükenmesi, Redis AOF bozulması, MySQL 8 fiziksel restore, Kafka offset kurtarma, çok kiracılı Docker stack arızaları. Şu an OSCP+, CKA ve CKS’e hazırlanıyorum.',
+      'Üretim olaylarına müdahaleyi ben yürütüyorum — Proxmox LVM thin-pool tükenmesi, Redis AOF bozulması, MySQL 8 fiziksel restore, Kafka offset kurtarma, çok kiracılı Docker stack arızaları. Şu an OSCP+ ve CKS’e hazırlanıyorum.',
     ],
     languagesLabel: 'Diller',
     languages: ['Türkçe — ana dil', 'İngilizce — CEFR B1–B2'],
@@ -148,7 +150,7 @@ export const tr = {
       },
       'devsecops-handbook': {
         tagline:
-          'Türkçe DevOps · DevSecOps · SRE · Platform Engineering başucu kitabı. 21 konu, 125+ deep-dive, 9 cheatsheet, 25+ production-ready template, 65K+ satır — Kubernetes, Terraform, GitOps, FinOps, Observability, LLMOps, KVKK/GDPR.',
+          'İki dilli (TR/EN) DevOps · DevSecOps · SRE · Platform Engineering başucu kitabı. 21 konu, 134 deep-dive doküman, ~85K satır, production checklist’leri ve 28 günlük AWS + Terraform + EKS uygulama rehberi — Kubernetes, GitOps, FinOps, Observability, LLMOps, KVKK/GDPR.',
       },
       'databases-stack': {
         tagline:
@@ -261,7 +263,6 @@ export const tr = {
       'Yöneticilik döneminde yıllık etkinlik programını planladım, yönetim kurulunu koordine ettim, topluluğu üniversite içinde temsil ettim ve öğrencilere güvenlik temellerini tanıtan uygulamalı teknik atölyeler yürüttüm. Eylül 2026’da görevi devrettim; topluluğa uzaktan destek vermeyi sürdürüyorum.',
     certifications: [
       { name: 'OSCP+', full: 'OffSec Certified Professional' },
-      { name: 'CKA', full: 'Certified Kubernetes Administrator' },
       { name: 'CKS', full: 'Certified Kubernetes Security Specialist' },
     ],
   },

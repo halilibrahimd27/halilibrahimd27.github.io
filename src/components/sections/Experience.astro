@@ -36,28 +36,40 @@ const { ui } = content;
             ]}
           />
 
-          <p class="meta mb-1.5 flex flex-wrap items-center gap-x-2 gap-y-1">
-            <time datetime={machineDate(entry.start)}>{period}</time>
-            <span aria-hidden="true">·</span>
-            <span>{entry.location}</span>
-          </p>
+          {/*
+            Geniş ekranda tarih/konum sağ meta kolonuna geçer — metin ~640px'e
+            kilitliyken sağ yarı boş kalıyordu. DOM sırası korunuyor (önce
+            tarih), yalnızca grid yerleşimi değişiyor; ekran okuyucu sırası
+            mobildeki ile aynı kalsın diye.
+          */}
+          <div class="lg:grid lg:grid-cols-[minmax(0,1fr)_9rem] lg:gap-8">
+            <p class="meta mb-1.5 flex flex-wrap items-center gap-x-2 gap-y-1 lg:col-start-2 lg:row-start-1 lg:mb-0 lg:flex-col lg:items-end lg:gap-y-0.5 lg:pt-1 lg:text-right">
+              <time datetime={machineDate(entry.start)}>{period}</time>
+              <span aria-hidden="true" class="lg:hidden">
+                ·
+              </span>
+              <span>{entry.location}</span>
+            </p>
 
-          <h3 class="text-base sm:text-lg">{copy.role}</h3>
-          <p class="text-accent-fg mb-3 font-mono text-[13px]">{entry.org}</p>
+            <div class="lg:col-start-1 lg:row-start-1">
+              <h3 class="text-base sm:text-lg">{copy.role}</h3>
+              <p class="text-accent-fg mb-3 font-mono text-[13px]">{entry.org}</p>
 
-          <p class="text-muted mb-3 max-w-[68ch] text-[15px]">{copy.summary}</p>
+              <p class="text-muted mb-3 text-[15px]">{copy.summary}</p>
 
-          <ul class="space-y-2">
-            {copy.bullets.map((bullet) => (
-              <li class="text-muted relative max-w-[70ch] pl-4 text-[14px] leading-relaxed">
-                <span
-                  aria-hidden="true"
-                  class="bg-[var(--color-line-strong)] absolute top-[0.6em] left-0 h-[3px] w-[3px] rounded-[1px]"
-                />
-                {bullet}
-              </li>
-            ))}
-          </ul>
+              <ul class="space-y-2">
+                {copy.bullets.map((bullet) => (
+                  <li class="text-muted relative pl-4 text-[14px] leading-relaxed">
+                    <span
+                      aria-hidden="true"
+                      class="bg-[var(--color-line-strong)] absolute top-[0.6em] left-0 h-[3px] w-[3px] rounded-[1px]"
+                    />
+                    {bullet}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </li>
       );
     })}

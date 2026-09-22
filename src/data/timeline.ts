@@ -4,9 +4,9 @@ import type { EducationFacts, ExperienceFacts, VolunteeringStep } from './types'
  * Deneyim / eğitim / gönüllülüğün DİLDEN BAĞIMSIZ gerçekleri.
  * Ünvanlar ve madde metinleri content.tr.ts / content.en.ts içinde, aynı id ile.
  *
- * NOT — `location` alanı bilinçli olarak yalnızca ülke düzeyinde tutuluyor;
- * hero'daki konum satırıyla tutarlı olsun diye (şehir paylaşılmıyor).
- * Şehir göstermek isterseniz burada 'Malatya, Türkiye' gibi yazmanız yeterli.
+ * `location` CV ile birebir aynı düzeyde: deneyim satırlarında şehir, hero'daki
+ * konum satırında ülke. CV de tam olarak bunu yapıyor (başlıkta "Türkiye",
+ * kayıtlarda "Malatya / Muğla"), böylece iki belge çelişmiyor.
  */
 export const experience = [
   {
@@ -14,35 +14,35 @@ export const experience = [
     org: 'Ayssoft Bilgi Teknolojileri',
     start: '2025-05',
     end: null,
-    location: 'Türkiye',
+    location: 'Malatya, Türkiye',
   },
   {
     id: 'inonu-ddo',
     org: 'İnönü Üniversitesi · Dijital Dönüşüm Ofisi',
     start: '2024-12',
     end: '2025-05',
-    location: 'Türkiye',
+    location: 'Malatya, Türkiye',
   },
   {
     id: 'shiftsoft',
     org: 'ShiftSoft Software Technology',
     start: '2024-07',
     end: '2024-09',
-    location: 'Türkiye',
+    location: 'Muğla, Türkiye',
   },
   {
     id: 'unity-dev',
     org: 'Unity Dev Group',
     start: '2023-08',
     end: '2024-12',
-    location: 'Türkiye',
+    location: 'Muğla, Türkiye',
   },
   {
     id: 'rextabi',
     org: 'Rextabi Creative',
     start: '2021-06',
     end: '2023-08',
-    location: 'Türkiye',
+    location: 'Muğla, Türkiye',
   },
 ] as const satisfies readonly ExperienceFacts[];
 
