@@ -4,6 +4,7 @@ import type { SiteContent } from '../../data';
 import type { ProjectFacts } from '../../data/types';
 import ExternalLink from './ExternalLink.astro';
 import RepoMeta from './RepoMeta.astro';
+import { resolveStats } from '../../data/github';
 
 interface Props {
   project: ProjectFacts;
@@ -17,6 +18,8 @@ interface Props {
 const { project, tagline, locale, content, delay = 0 } = Astro.props;
 const { ui } = content;
 const repoUrl = `https://github.com/${project.repo}`;
+/* Build anındaki taze değerler; yoksa projects.ts'teki yedeğe düşer. */
+const { stars, updated } = resolveStats(project);
 ---
 
 <article
@@ -35,7 +38,7 @@ const repoUrl = `https://github.com/${project.repo}`;
         {project.id}
       </ExternalLink>
     </h3>
-    <RepoMeta stars={project.stars} updated={project.updated} locale={locale} content={content} />
+    <RepoMeta stars={stars} updated={updated} locale={locale} content={content} />
   </div>
 
   <p class="text-muted grow text-[14px] leading-relaxed">{tagline}</p>
