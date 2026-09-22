@@ -6,6 +6,12 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # Haftalık tazeleme: proje kartlarındaki yıldız ve son-push tarihleri, bu
+  # repoya hiç commit atılmasa bile diğer repolarda değiştikçe güncellensin.
+  # Ziyaretçi tarayıcısı zaten canlı çekiyor; bu, HTML kaynağını da taze tutar
+  # (JS kapalı ziyaretçiler, crawler'lar ve rate-limit durumu için).
+  schedule:
+    - cron: '0 6 * * 1'
 
 # En az yetki: yayın için gereken üçü dışında hiçbir izin yok.
 permissions:
@@ -42,6 +48,15 @@ jobs:
 
       - name: Configure Pages
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
+
+      # Token'ı BİLEREK yalnızca bu adıma veriyoruz. `pnpm build` yüzlerce
+      # transitif bağımlılığı çalıştırır; salt-okunur da olsa bir kimlik
+      # bilgisini o sürece sokmanın gereği yok. Script sıfır bağımlılıklıdır
+      # ve ağ hatasında sessizce yedek değerlere düşer.
+      - name: Fetch GitHub stats
+        run: pnpm stats
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build
         run: pnpm build

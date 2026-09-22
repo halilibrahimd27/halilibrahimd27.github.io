@@ -14,9 +14,11 @@ import type { ProjectFacts } from './types';
  *   more     → kompakt satır (Diğer projeler)
  *   hidden   → hiç render edilmez  ← göstermek için 'more' yapmanız yeterli
  *
- * `stars` / `updated` yalnızca YEDEK değerdir: sayfa açıldığında GitHub API'den
- * canlı veri çekilir ve yerinde güncellenir. API'ye ulaşılamazsa bu değerler
- * görünür. Son elle güncelleme: 2026-09-22.
+ * `stars` / `updated` ELLE BAKIM GEREKTİRMEZ — son çare yedeklerdir.
+ * Taze değerler iki kattan gelir:
+ *   1) build sırasında scripts/fetch-stats.mjs → HTML'e basılır
+ *   2) sayfa açıldığında src/scripts/github-stats.ts → yerinde günceller
+ * Buradaki değerler yalnızca ikisi de başarısız olursa görünür.
  */
 export const projects = [
   {
