@@ -35,10 +35,22 @@ const copy = content.education;
                 </time>
               </p>
               <h4 class="text-[15px]">{copy.items[entry.id].degree}</h4>
-              <p class="text-muted font-mono text-[13px]">{entry.org}</p>
-              {copy.items[entry.id].note && (
-                <p class="text-faint mt-1 text-[13px]">{copy.items[entry.id].note}</p>
-              )}
+              {/*
+                Not (ör. "Tezli program") kurumla AYNI satırda durur.
+                Ayrı bir üçüncü satır olarak bırakıldığında öksüz kalıyordu:
+                farklı font, farklı renk ve neye ait olduğu belirsiz.
+              */}
+              <p class="text-muted font-mono text-[13px]">
+                {entry.org}
+                {copy.items[entry.id].note && (
+                  <>
+                    <span aria-hidden="true" class="text-faint mx-1.5">
+                      ·
+                    </span>
+                    <span class="text-faint">{copy.items[entry.id].note}</span>
+                  </>
+                )}
+              </p>
             </li>
           ))}
         </ol>

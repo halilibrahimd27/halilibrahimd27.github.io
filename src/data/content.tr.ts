@@ -255,9 +255,10 @@ export const tr = {
       member: 'Üye',
       board: 'Yönetim Kurulu Üyesi',
       lead: 'Yönetici',
+      handover: 'Uzaktan destek',
     },
     volunteeringNote:
-      'Yıllık etkinlik programının planlanması, yönetim kurulunun koordinasyonu, topluluğun üniversite içinde temsili ve öğrencilere güvenlik temellerini tanıtan uygulamalı teknik atölyeler.',
+      'Yöneticilik döneminde yıllık etkinlik programını planladım, yönetim kurulunu koordine ettim, topluluğu üniversite içinde temsil ettim ve öğrencilere güvenlik temellerini tanıtan uygulamalı teknik atölyeler yürüttüm. Eylül 2026’da görevi devrettim; topluluğa uzaktan destek vermeyi sürdürüyorum.',
     certifications: [
       { name: 'OSCP+', full: 'OffSec Certified Professional' },
       { name: 'CKA', full: 'Certified Kubernetes Administrator' },
