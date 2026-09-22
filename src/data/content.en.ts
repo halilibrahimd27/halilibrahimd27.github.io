@@ -12,7 +12,7 @@ import type { SkillGroupId } from './skills';
 export const en = {
   meta: {
     locale: 'en',
-    htmlLang: 'en-US',
+    htmlLang: 'en-GB',
     title: 'Halil İbrahim Dürmüş — DevSecOps Engineer',
     description:
       'DevSecOps Engineer. Proxmox and Docker infrastructure, GitOps-based CI/CD pipelines, defence layers that reach from pre-commit to runtime.',
@@ -154,7 +154,7 @@ export const en = {
       },
       'databases-stack': {
         tagline:
-          '12 databases on one server, from one panel. Memory is sized from measurement, the standby takes over by itself, and backups are proved by actually restoring them. Docker Compose + Kubernetes, internal TLS included.',
+          '12 databases on one server, from one panel. Memory limits are sized from real measurements, the standby takes over automatically when the primary fails, and backups are proved by actually restoring them. Docker Compose + Kubernetes, internal TLS included.',
       },
       'pipeline-101-lab': {
         tagline:
@@ -252,7 +252,7 @@ export const en = {
       msc: { degree: 'MSc — Software Engineering', note: 'Thesis track' },
       bsc: { degree: 'BSc — Software Engineering' },
     },
-    volunteeringOrg: 'İnönü University Cyber Security Community',
+    volunteeringOrg: 'İnönü University Cyber Security Society',
     volunteeringRoles: {
       member: 'Member',
       board: 'Board Member',

@@ -3,7 +3,7 @@
  *
  * CI'DA KOŞMAZ. Tarayıcı sürücüsü (puppeteer-core) kalıcı bir bağımlılık
  * değil; gerektiğinde geçici kurulur. CI zaten statik denetimleri yapıyor
- * (scripts/check-external-links.mjs + linkinator).
+ * (scripts/verify-build.mjs + linkinator).
  *
  * Çalıştırma:
  *   pnpm build

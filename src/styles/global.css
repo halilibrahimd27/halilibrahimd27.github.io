@@ -29,6 +29,9 @@
   --color-accent-fg: #4ade80;
   --color-accent-soft: rgb(74 222 128 / 0.1);
   --color-ring: #4ade80;
+  /* Buton/kontrol kenarlığı — hairline'dan ayrı çünkü WCAG 1.4.11 arayüz
+     bileşeni sınırları için 3:1 istiyor; --color-line dekoratif ayraçlar için. */
+  --color-control: #646e7a;
 
   /* İçerik genişliği — 1100px */
   --container-content: 68.75rem;
@@ -51,11 +54,12 @@
     --color-line-strong: #cbd5e0;
     --color-text: #0b0e11;
     --color-muted: #4a5560;
-    --color-faint: #6b7783;
+    --color-faint: #5a6672;
     --color-accent: #4ade80;
     --color-accent-fg: #15803d;
     --color-accent-soft: rgb(21 128 61 / 0.08);
     --color-ring: #15803d;
+    --color-control: #7a8490;
   }
 }
 
@@ -68,11 +72,12 @@
   --color-line-strong: #cbd5e0;
   --color-text: #0b0e11;
   --color-muted: #4a5560;
-  --color-faint: #6b7783;
+  --color-faint: #5a6672;
   --color-accent: #4ade80;
   --color-accent-fg: #15803d;
   --color-accent-soft: rgb(21 128 61 / 0.08);
   --color-ring: #15803d;
+  --color-control: #7a8490;
 }
 
 /* Koyu tema — kullanıcı toggle ile seçtiyse (sistem açık olsa bile) */
@@ -89,6 +94,7 @@
   --color-accent-fg: #4ade80;
   --color-accent-soft: rgb(74 222 128 / 0.1);
   --color-ring: #4ade80;
+  --color-control: #646e7a;
 }
 
 /* ─── Temel katman ───────────────────────────────────────────────────────── */
@@ -291,7 +297,7 @@
     font-size: 0.8125rem;
     letter-spacing: 0.02em;
     padding: 0.625rem 1rem;
-    border: 1px solid var(--color-line-strong);
+    border: 1px solid var(--color-control);
     border-radius: var(--radius-card);
     color: var(--color-text);
     transition:
@@ -365,7 +371,9 @@
 
 .nav-rail[data-active='true'] .nav-rail-tick {
   height: 20px;
-  background-color: var(--color-accent);
+  /* accent değil accent-fg: açık temada #4ADE80 beyaz üstünde 1.70:1 kalıyor
+     ve aktif bölüm işareti tek başına algılanamıyordu. */
+  background-color: var(--color-accent-fg);
 }
 
 /* Skip-link: yalnızca klavyeyle odaklanınca görünür */

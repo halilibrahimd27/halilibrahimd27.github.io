@@ -4,14 +4,13 @@ import Section from '../ui/Section.astro';
 
 interface Props {
   content: SiteContent;
-  index: number;
 }
 
-const { content, index } = Astro.props;
+const { content } = Astro.props;
 const { about } = content;
 ---
 
-<Section id="about" index={index} heading={about.heading}>
+<Section id="about" heading={about.heading}>
   <div class="grid gap-10 lg:grid-cols-[1fr_auto] lg:gap-16">
     <div class="max-w-[68ch] space-y-5">
       {about.paragraphs.map((paragraph, i) => (

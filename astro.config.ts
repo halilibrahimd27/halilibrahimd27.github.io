@@ -34,7 +34,7 @@ export default defineConfig({
     sitemap({
       i18n: {
         defaultLocale: 'tr',
-        locales: { tr: 'tr-TR', en: 'en-US' },
+        locales: { tr: 'tr-TR', en: 'en-GB' },
       },
     }),
     // Inline script'lerin sha256'sını hesaplayıp CSP meta'sına yazar.

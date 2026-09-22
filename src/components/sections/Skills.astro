@@ -5,13 +5,12 @@ import Section from '../ui/Section.astro';
 
 interface Props {
   content: SiteContent;
-  index: number;
 }
 
-const { content, index } = Astro.props;
+const { content } = Astro.props;
 ---
 
-<Section id="skills" index={index} heading={content.skills.heading} intro={content.skills.intro}>
+<Section id="skills" heading={content.skills.heading} intro={content.skills.intro}>
   <div class="grid gap-x-10 gap-y-8 sm:grid-cols-2">
     {skillGroups.map((group, i) => (
       <section

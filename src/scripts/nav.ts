@@ -84,6 +84,13 @@ if (sections.length > 0 && navLinks.length > 0) {
 /* ─── Scroll-reveal ──────────────────────────────────────────────────────── */
 
 if (root.classList.contains('reveal-ready')) {
+  /*
+   * theme-init.js'in ölü adam düğmesine "buradayım" de. Bu satır çalışmazsa
+   * (bundle yüklenemedi, önceki bir modül throw etti) 2 saniye sonra
+   * reveal-ready kaldırılır ve içerik yine de görünür olur.
+   */
+  root.dataset.navReady = '1';
+
   const targets = document.querySelectorAll<HTMLElement>('[data-reveal]');
 
   const reveal = new IntersectionObserver(
