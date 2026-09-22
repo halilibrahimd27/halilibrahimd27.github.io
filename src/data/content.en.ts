@@ -258,11 +258,11 @@ export const en = {
     volunteeringRoles: {
       member: 'Member',
       board: 'Board Member',
-      lead: 'Manager',
+      lead: 'President',
       handover: 'Remote support',
     },
     volunteeringNote:
-      'As manager I planned the community’s annual activity programme, coordinated the board, represented the community within the university, and ran hands-on technical workshops introducing students to security fundamentals. I handed the role over in September 2026 and continue to support the community remotely.',
+      'As president I planned the community’s annual activity programme, coordinated the board, represented the community within the university, and ran hands-on technical workshops introducing students to security fundamentals. I handed the role over in September 2026 and continue to support the community remotely.',
     certifications: [
       { name: 'OSCP+', full: 'OffSec Certified Professional' },
       { name: 'CKS', full: 'Certified Kubernetes Security Specialist' },
