@@ -1,227 +1,260 @@
-# halilibrahimd27.github.io
+<div align="center">
 
-Kişisel tanıtım sitesi — **Astro 7 + Tailwind 4 + TypeScript**, tamamen statik, GitHub Pages'te yayınlanıyor.
+<img src="public/og/og-tr.png" alt="Halil İbrahim Dürmüş — DevSecOps Engineer" width="820">
 
-TR `/` · EN `/en/` · [Kullandıklarım](/uses) · [/en/uses](/en/uses)
+### [halilibrahimd27.github.io](https://halilibrahimd27.github.io/)
 
----
+**[Türkçe](https://halilibrahimd27.github.io/)** · **[English](https://halilibrahimd27.github.io/en/)** · **[Kullandıklarım](https://halilibrahimd27.github.io/uses)**
 
-## Neyi nereden değiştirirsiniz
+[![CI](https://github.com/halilibrahimd27/halilibrahimd27.github.io/actions/workflows/ci.yml/badge.svg)](https://github.com/halilibrahimd27/halilibrahimd27.github.io/actions/workflows/ci.yml)
+[![Deploy](https://github.com/halilibrahimd27/halilibrahimd27.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/halilibrahimd27/halilibrahimd27.github.io/actions/workflows/deploy.yml)
 
-Sitedeki **hiçbir metin bileşenlerin içine gömülü değil.** Hepsi `src/data/` altındaki tek kaynak dosyalarda.
-
-| Ne değişecek                         | Dosya                    |
-| ------------------------------------ | ------------------------ |
-| Türkçe metinlerin tamamı             | `src/data/content.tr.ts` |
-| İngilizce metinlerin tamamı          | `src/data/content.en.ts` |
-| Projeler (repo, etiket, görünürlük)  | `src/data/projects.ts`   |
-| İş / eğitim / gönüllülük tarihleri   | `src/data/timeline.ts`   |
-| Yetenek kategorileri ve araçlar      | `src/data/skills.ts`     |
-| E-posta, linkler, CV dosya adı       | `src/data/site.ts`       |
-| Renk / tipografi / boşluk token'ları | `src/styles/global.css`  |
-| Yayın adresi ve alt dizin (`base`)   | `astro.config.ts`        |
-
-### İki dil asla ayrışamaz
-
-`content.tr.ts` ve `content.en.ts`, `src/data/types.ts` içindeki `Content` sözleşmesini
-`satisfies` ile karşılar. Birine alan ekleyip diğerine eklemeyi unutursanız **`pnpm build` kırılır.**
-Aynısı proje / deneyim / eğitim id'leri için de geçerli: `projects.ts`'e yeni bir proje eklerseniz,
-iki dil dosyasına da açıklamasını eklemeden build geçmez.
-
-### Yeni proje eklemek
-
-1. `src/data/projects.ts` içine bir obje:
-
-   ```ts
-   {
-     id: 'repo-adi',                         // GitHub repo adı = kart başlığı
-     repo: 'halilibrahimd27/repo-adi',
-     tech: ['Python', 'Docker'],
-     tier: 'featured',                       // featured | more | hidden
-     homepage: 'https://...',                // opsiyonel, "Canlı" linki
-     stars: 0,                               // GitHub'a ulaşılamazsa yedek değer
-     updated: '2026-09-22',
-   }
-   ```
-
-2. `content.tr.ts` ve `content.en.ts` → `projects.items` altına aynı `id` ile birer `tagline`.
-
-Başka hiçbir dosyaya dokunmanız gerekmez.
-
-**`tier` ne yapar:**
-`featured` büyük kart, `more` kompakt satır, `hidden` hiç render edilmez.
-Şu an `yepaket`, `trafik-analiz` ve `RealTimeObjectDetection` gizli — göstermek için
-`tier`'ı `'more'` yapmanız yeterli, açıklamaları iki dilde de hazır duruyor.
+</div>
 
 ---
 
-## Doldurmanız gereken yerler
+Kişisel tanıtım sitem. İki dilli, tamamen statik, GitHub Pages'te yayında.
 
-Kodda bilerek bırakılmış üç placeholder var:
+Bir portfolyo sitesinin kendisi de bir teslim işidir: tarayıcıya ne kadar JavaScript gönderdiğiniz,
+hangi güvenlik politikasıyla gittiğiniz ve bir şey bozulduğunda bunu kimin fark ettiği ölçülebilir
+şeylerdir. Bu repo o ölçülerle yazıldı.
 
-| Placeholder                                                                    | Nerede                                            | Ne yapmalı                                                                                                                                                                                                    |
-| ------------------------------------------------------------------------------ | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `<PLACEHOLDER_EMAIL>`                                                          | `src/data/site.ts` → `EMAIL`                      | Gerçek adresinizi yazın. Yazana kadar İletişim'de "Yakında eklenecek" görünür, **kırık `mailto:` linki basılmaz.** Adres otomatik olarak HTML entity'lerine çevrilir (scraper koruması); siz düz metin yazın. |
-| `<PLACEHOLDER_LAPTOP>` / `<PLACEHOLDER_HOMELAB>` / `<PLACEHOLDER_PERIPHERALS>` | `content.tr.ts` + `content.en.ts` → `uses.groups` | `/uses` sayfasındaki donanım satırları. Elimde gerçek bilginiz olmadığı için uydurulmadı.                                                                                                                     |
-| CV dosyası                                                                     | `public/cv/HALIL_IBRAHIM_DURMUS_CV_INTL.pdf`      | Dosyayı koyduğunuz anda hero ve İletişim'deki "CV indir" butonu **kendiliğinden görünür.** Dosya yokken buton hiç render edilmez.                                                                             |
+## Rakamlar
 
----
+Hepsi bu repodaki build'den ölçüldü — hedef değil, çıktı.
 
-## Komutlar
+|                    |                                                      |
+| ------------------ | ---------------------------------------------------- |
+| Client JavaScript  | **4.9 KB** ham · ~2.6 KB gzip                        |
+| UI framework       | **yok** — React/Preact/Svelte hiçbiri kurulu değil   |
+| Üçüncü parti istek | **0** — analytics, tracker, CDN, çerez yok           |
+| CSS                | 24.8 KB ham · 6.0 KB gzip                            |
+| Font               | 4 dosya, yalnızca `latin` + `latin-ext`, self-hosted |
+| Toplam çıktı       | 471 KB / 5 sayfa                                     |
+| CSP                | `'unsafe-inline'` **içermiyor**                      |
+| JS kapalıyken      | 7/7 bölüm, 12 proje kartı, 10.694 karakter okunur    |
+
+## Öne çıkan kararlar
+
+**Sıfır framework, dört küçük island.** Tema değiştirici, dil değiştirici, GitHub yıldız verisi ve
+scroll-spy/reveal — hepsi vanilla TypeScript, toplamı 4.9 KB. Astro'nun varsayılan zero-JS davranışı
+korundu: bir bileşen JavaScript gerektirmiyorsa göndermiyor.
+
+**JavaScript kapalıyken site eksiksiz okunur.** Bölümler, projeler, deneyim, iletişim — hepsi
+sunucuda render edilmiş halde. Kaybolan tek şey tema butonu, canlı yıldız sayıları ve aktif bölüm
+vurgusu. Scroll-reveal animasyonları içeriği gizleyerek değil, yalnızca JS _varsa_ devreye girerek
+çalışır; JS yoksa hiçbir şey saklanmaz.
+
+**`'unsafe-inline'` olmayan CSP.** GitHub Pages HTTP header veremediği için politika `<meta>` ile
+kuruluyor. Inline `<style>` üretilmesin diye `build.inlineStylesheets: 'never'`; geriye kalan tek
+inline blok olan JSON-LD'nin sha256'sı build sonunda bir Astro entegrasyonu tarafından politikaya
+yazılıyor. Scroll-reveal gecikmeleri bile inline `style` attribute'u yerine veri attribute'u ve CSS
+kuralıyla veriliyor — çünkü `style-src 'self'` inline style attribute'larını da bloklar ve hash'ler
+onlara uygulanmaz.
+
+> `<meta>` ile kurulan CSP'de `frame-ancestors`, `sandbox` ve `report-uri` tarayıcı tarafından yok
+> sayılır. GitHub Pages header veremediği için bu üçü burada uygulanamıyor; politikaya varmış gibi
+> eklenmedi.
+
+**İki dil tip sistemiyle bağlı.** Sitedeki hiçbir metin bileşenlerin içine gömülü değil; hepsi
+`src/data/content.tr.ts` ve `content.en.ts` içinde. İkisi de `src/data/types.ts`'teki `Content`
+sözleşmesini `satisfies` ile karşılar. Bir alanı birine ekleyip diğerine eklemeyi unutmak **build'i
+kırar** — iki dilin içeriği sessizce ayrışamaz.
+
+**Kendi kendini denetleyen build.** `scripts/verify-build.mjs` her koşuda üretilen HTML'i tarar:
+`target="_blank"` olan her link `rel="noopener noreferrer"` taşıyor mu, CSP hash'leri doldurulmuş
+mu, politikaya `unsafe-*` sızmış mı, sayfaya doldurulmamış bir içerik yer tutucusu basılmış mı.
+Sonuncusu boşuna eklenmedi: `/uses` sayfasındaki donanım satırları bir kez gerçekten yayına çıktı.
+Artık build kırılıyor.
+
+**WCAG AA, renkle sınırlı kalmadan.** Accent yeşili (`#4ADE80`) beyaz üstünde 1.7:1 — açık temada
+metin olarak kullanılamaz. Bu yüzden iki ayrı token var: `--color-accent` dekoratif öğeler için,
+`--color-accent-fg` metin için (açık temada `#15803D`, ≈5.0:1). Tek `<h1>`, landmark'lar, skip-link,
+görünür focus ring, `prefers-reduced-motion` desteği.
+
+**Tema sistemi canlı izler.** Kullanıcı bir tercih kaydetmediği sürece `data-theme` attribute'u hiç
+yazılmaz ve site işletim sistemi temasını takip etmeye devam eder — sayfa yenilemeye gerek yok.
+Toggle'a basıldığında seçim `localStorage`'a yazılır ve artık o kazanır.
+
+**Pinlenmiş tedarik zinciri.** Her GitHub Action commit SHA'sına pinli (tag taşınabilir, SHA
+taşınmaz). Deploy izinleri minimumda: `contents: read`, `pages: write`, `id-token: write`. OG görseli
+üretimi ve tarayıcı denetimi kalıcı bağımlılık değil — gerektiğinde geçici kurulur, CI her koşuda
+native binary indirmez.
+
+## Nasıl doğrulandı
+
+Ölçülen, varsayılan değil:
+
+- `astro check` — 46 dosya, 0 hata
+- Tarayıcı konsolu — 5 sayfada 0 error, 0 warning, 0 başarısız istek
+- JavaScript kapalı — 7/7 bölüm görünür, 12 proje kartı render edilmiş
+- Yatay taşma — 360 / 768 / 1440 px'te üç sayfada da yok
+- Dış linkler, CSP ve içerik yer tutucuları — her build'de otomatik
+
+`pnpm check:browser` bu denetimlerin tarayıcı tarafını tekrar çalıştırır.
+
+## Mimari
+
+```
+src/
+├─ data/           # sitedeki TÜM metin + tip sözleşmesi
+│  ├─ types.ts        Content arayüzü — iki dili birbirine bağlar
+│  ├─ content.tr.ts   Türkçe içerik
+│  ├─ content.en.ts   İngilizce içerik
+│  ├─ projects.ts     dilden bağımsız proje gerçekleri
+│  ├─ timeline.ts     iş / eğitim / gönüllülük tarihleri
+│  ├─ skills.ts       yetenek kategorileri
+│  └─ site.ts         kimlik, linkler, CV algılama
+├─ i18n/           # rota ve tarih yardımcıları (BASE_URL üzerinden)
+├─ layouts/        # Base.astro — head, iskelet, island'lar
+├─ components/     # head · nav · controls · sections · ui
+├─ scripts/        # client island'ları (vanilla TS)
+├─ styles/         # global.css (token'lar) · fonts.css
+├─ assets/fonts/   # self-hosted woff2 alt kümeleri
+└─ pages/          # / · /uses · /en/ · /en/uses · /404 · /robots.txt
+
+integrations/csp.ts        inline script → sha256 → CSP meta
+scripts/verify-build.mjs   build çıktısı denetimi (CI'da koşar)
+scripts/browser-audit.mjs  konsol + JS-kapalı denetimi
+scripts/og.ts              OG görseli üretimi
+```
+
+Metin ile gerçekler bilinçli olarak ayrı: proje _açıklaması_ dile bağlı olduğu için content
+dosyalarında, proje _repo adı ve teknolojileri_ dilden bağımsız olduğu için `projects.ts`'te. Aynı
+`id` ikisini birbirine bağlar ve TypeScript eşleşmeyi zorunlu kılar.
+
+## Geliştirme
+
+Node 22 ve pnpm gerekir.
 
 ```bash
-pnpm install          # Node 22 gerekir
+pnpm install
 pnpm dev              # http://localhost:4321
 pnpm build            # → dist/
 pnpm preview          # dist/'i yerelde sun
-
-pnpm typecheck        # astro check — iki dilin sözleşmesini de doğrular
-pnpm lint             # eslint
-pnpm format           # prettier --write
-pnpm check:links      # dist: dış link rel'leri + CSP denetimi
-pnpm linkcheck        # dist: kırık iç link taraması
-pnpm check:browser    # konsol temizliği + JS kapalı senaryosu (puppeteer gerekir)
 ```
 
-`check:browser` CI'da koşmaz; tarayıcı sürücüsü kalıcı bağımlılık değil:
+Kalite kapıları — CI'da da aynıları koşar:
 
 ```bash
-pnpm build && pnpm preview &
-pnpm add -D puppeteer-core
-pnpm check:browser
-pnpm remove puppeteer-core
+pnpm typecheck        # astro check, iki dilin sözleşmesi dahil
+pnpm lint             # eslint
+pnpm format:check     # prettier
+pnpm verify           # dist: rel, CSP ve içerik denetimi
+pnpm linkcheck        # dist: kırık iç link taraması
 ```
+
+### İçerik güncelleme
+
+Yeni proje eklemek iki adım:
+
+```ts
+// 1) src/data/projects.ts
+{
+  id: 'repo-adi',                    // GitHub repo adı = kart başlığı
+  repo: 'halilibrahimd27/repo-adi',
+  tech: ['Python', 'Docker'],
+  tier: 'featured',                  // featured · more · hidden
+  homepage: 'https://...',           // opsiyonel, "Canlı" linki
+  stars: 0,                          // GitHub'a ulaşılamazsa yedek değer
+  updated: '2026-09-22',
+}
+
+// 2) content.tr.ts ve content.en.ts → projects.items altına aynı id ile tagline
+```
+
+Birini unutursanız build kırılır. `tier` kartın nasıl göründüğünü belirler: `featured` büyük kart,
+`more` kompakt satır, `hidden` hiç render edilmez — veride durur, istendiğinde tek kelimeyle yayına
+girer.
+
+Yıldız sayıları ve son güncelleme tarihleri sayfa açıldığında GitHub REST API'sinden çekilir
+(auth'suz, tek istek, 1 saatlik `localStorage` cache). Kartlar zaten statik veriyle tam render
+edilmiştir; script yalnızca metni yerinde günceller. İstek başarısız olursa hiçbir şey olmaz — hata
+gösterilmez, düzen kaymaz.
+
+### Yapılandırma
+
+| Ayar               | Yer                                 | Davranış                                                                                                     |
+| ------------------ | ----------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| İletişim e-postası | `src/data/site.ts` → `EMAIL`        | Boşken İletişim'de "yakında" görünür, kırık `mailto:` basılmaz. Adres HTML entity'lerine otomatik çevrilir.  |
+| CV dosyası         | `public/cv/`                        | `CV_FILENAME` ile eşleşen dosya konulduğunda "CV indir" butonu kendiliğinden belirir; yokken render edilmez. |
+| Yayın adresi       | `astro.config.ts` → `SITE` / `BASE` | Aşağıya bakın.                                                                                               |
+
+Üçü de yokluğa dayanıklı: eksik bir değer siteyi kırmaz, ilgili öğe sessizce render edilmez.
 
 ### OG görselleri
 
-`public/og/og-tr.png`, `public/og/og-en.png` ve `public/apple-touch-icon.png` **commit'li**.
-Üretim bağımlılıkları (satori, resvg) bilerek kalıcı kurulu değil — CI'ın her koşuda native
-bir binary indirmesine gerek yok.
-
-Ad, ünvan, `meta.ogTagline` ya da accent rengi değişirse yeniden üretin:
+`public/og/*.png` ve `public/apple-touch-icon.png` commit'lidir. Ad, ünvan, `meta.ogTagline` ya da
+accent rengi değişirse yeniden üretin:
 
 ```bash
-pnpm og   # bağımlılıkları kurar → üretir → kaldırır
+pnpm og   # bağımlılıkları geçici kurar → üretir → kaldırır
 ```
-
----
 
 ## Deploy
 
-`main`'e push → `.github/workflows/deploy.yml` → build → `actions/deploy-pages`.
-İzinler minimumda (`contents: read`, `pages: write`, `id-token: write`) ve
-**tüm action'lar commit SHA'sına pinli** (tag taşınabilir, SHA taşınmaz).
+`main`'e push → build → `actions/deploy-pages`. Her PR'da ayrıca CI: typecheck, lint, format, build,
+çıktı denetimi, link taraması.
 
-Ayrıca her PR'da `ci.yml`: typecheck → lint → format → build → çıktı denetimi → link taraması.
+GitHub tarafında tek gerekli ayar: **Settings → Pages → Source: GitHub Actions**.
 
-**İlk kurulum:** repo → Settings → Pages → _Source: GitHub Actions_.
+### Başka bir adrese taşımak
 
-### Siteyi başka bir adrese taşımak
-
-Değiştirilecek **tek yer** `astro.config.ts`'in başı:
+Değiştirilecek tek yer `astro.config.ts`'in başı:
 
 ```ts
 const SITE = 'https://halilibrahimd27.github.io';
 const BASE = '/';
 ```
 
-| Senaryo                           | `SITE`                              | `BASE`        |
-| --------------------------------- | ----------------------------------- | ------------- |
-| User site (`kullanici.github.io`) | `https://halilibrahimd27.github.io` | `/`           |
-| Proje repo'su (`.../portfolyo`)   | `https://halilibrahimd27.github.io` | `/portfolyo/` |
-| Özel alan adı                     | `https://ornek.com`                 | `/`           |
+| Senaryo       | `SITE`                              | `BASE`        |
+| ------------- | ----------------------------------- | ------------- |
+| User site     | `https://halilibrahimd27.github.io` | `/`           |
+| Proje repo'su | `https://halilibrahimd27.github.io` | `/portfolyo/` |
+| Özel alan adı | `https://ornek.com`                 | `/`           |
 
-Tüm iç linkler, sitemap, `hreflang` ve OG adresleri bu ikisinden türetilir; sabit yazılmış yol yoktur.
+Tüm iç linkler, sitemap, `hreflang` ve OG adresleri bu ikisinden türer; sabit yazılmış yol yoktur.
 
-### Özel alan adı (custom domain)
+### Özel alan adı
 
-1. `public/CNAME` dosyası oluşturun, içine **tek satır** alan adını yazın (şema ve eğik çizgi yok):
+1. `public/CNAME` oluşturun, içine tek satır alan adı (şema ve eğik çizgi yok): `ornek.com`
+2. DNS:
+   - apex → dört `A` kaydı: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
+   - `www` → `CNAME` → `halilibrahimd27.github.io`
+3. `astro.config.ts` → `SITE = 'https://ornek.com'`
+4. Settings → Pages → Custom domain, ardından **Enforce HTTPS**
 
-   ```
-   ornek.com
-   ```
+## Stack
 
-2. DNS kayıtları:
-   - **apex** (`ornek.com`) → dört `A` kaydı: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
-   - **www** → `CNAME` → `halilibrahimd27.github.io`
-3. `astro.config.ts` → `SITE = 'https://ornek.com'`, `BASE = '/'`.
-4. Settings → Pages → Custom domain'e aynı adı girin, **Enforce HTTPS**'i işaretleyin.
-
----
-
-## Teknik kararlar
-
-**Client JS toplamı ~3.5 KB (ham).** UI framework yok — React/Preact/Svelte hiçbiri kurulu değil.
-Bir senkron başlangıç script'i ve dört vanilla TypeScript island:
-
-| Script                 | İşi                             | JS kapalıyken                    |
-| ---------------------- | ------------------------------- | -------------------------------- |
-| `public/theme-init.js` | Senkron tema + reveal hazırlığı | Tema sistem tercihini izler      |
-| `theme-toggle.ts`      | Tema değiştirici                | Buton hiç görünmez               |
-| `lang-switch.ts`       | Dil değiştirici, bölümü korur   | Link çalışır, sayfa başına gider |
-| `github-stats.ts`      | Yıldız + son güncelleme         | Statik veri zaten basılı         |
-| `nav.ts`               | Scroll-spy + scroll-reveal      | Linkler çalışır, vurgu olmaz     |
-
-**JS tamamen kapalıyken site eksiksiz okunur.** Kaybolan tek şey: tema butonu, canlı GitHub
-sayıları ve aktif bölüm vurgusu.
-
-**Tema:** kullanıcı bir tercih kaydetmediği sürece `data-theme` attribute'u hiç yazılmaz ve site
-işletim sistemi temasını **canlı** izler. Toggle'a basıldığında seçim `localStorage`'a yazılır.
-
-**Kontrast:** accent (`#4ADE80`) beyaz üstünde 1.7:1 — açık temada metin olarak kullanılamaz.
-Bu yüzden iki ayrı token var: `--color-accent` (dekoratif) ve `--color-accent-fg` (metin,
-açık temada `#15803D` ≈ 5.0:1). Hepsi WCAG AA geçer.
-
-**Fontlar** self-hosted, yalnızca `latin` + `latin-ext` alt kümeleri paketlenir
-(`latin-ext` Türkçe için zorunlu: ğ Ğ ş Ş İ orada). Dört `.woff2`, toplam ~190 KB, hiçbir CDN isteği yok.
-
-**GitHub verisi:** kartlar sunucuda statik veriyle **tam** render edilir; script yalnızca metni
-yerinde günceller. İstek başarısız olursa (offline, rate-limit) sessizce statik değerde kalır —
-hata gösterilmez, düzen kaymaz. Tek istek, 1 saatlik `localStorage` cache, auth yok.
-
-**CSP** `<meta http-equiv>` ile kuruluyor (GitHub Pages HTTP header veremiyor):
-
-```
-default-src 'self'; script-src 'self' 'sha256-…'; style-src 'self';
-img-src 'self' data:; font-src 'self'; connect-src 'self' https://api.github.com;
-object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests
-```
-
-`'unsafe-inline'` **yok**: `build.inlineStylesheets: 'never'` ile inline `<style>` üretilmiyor,
-geriye kalan tek inline blok olan JSON-LD'nin sha256'sı build sonunda `integrations/csp.ts`
-tarafından politikaya yazılıyor.
-
-> **Dürüst sınır:** `<meta>` ile kurulan CSP'de `frame-ancestors`, `sandbox` ve `report-uri`
-> tarayıcı tarafından **yok sayılır** (spec gereği). GitHub Pages header veremediği için bu üçü
-> bu sitede uygulanamıyor; politikaya varmış gibi eklenmedi.
+[Astro 7](https://astro.build) · [Tailwind CSS 4](https://tailwindcss.com) · TypeScript ·
+[Inter](https://rsms.me/inter/) + [JetBrains Mono](https://www.jetbrains.com/lp/mono/) (self-hosted)
+· GitHub Actions · GitHub Pages
 
 ---
 
-## Dizin yapısı
+## English
 
-```
-src/
-├─ data/           # TÜM içerik ve tip sözleşmesi
-├─ i18n/           # dil yapılandırması, yol ve tarih yardımcıları
-├─ layouts/        # Base.astro — head, iskelet, island'lar
-├─ components/
-│  ├─ head/        # Seo, JsonLd
-│  ├─ nav/         # TopBar, SideRail
-│  ├─ controls/    # ThemeToggle, LangSwitch
-│  ├─ sections/    # Hero, About, Experience, Projects, …
-│  └─ ui/          # Section, ProjectCard, ProjectRow, RepoMeta, ExternalLink
-├─ scripts/        # client island'ları (vanilla TS)
-├─ styles/         # global.css (token'lar), fonts.css
-├─ assets/fonts/   # self-hosted woff2 alt kümeleri
-└─ pages/          # /, /uses, /en/, /en/uses, /404, /robots.txt
+My personal portfolio — bilingual (Turkish / English), fully static, deployed to GitHub Pages.
 
-integrations/csp.ts          # inline script → sha256 → CSP meta
-scripts/og.ts                # OG görseli üretimi (tek seferlik)
-scripts/check-external-links.mjs  # rel="noopener noreferrer" + CSP denetimi
-```
+The site ships **4.9 KB of client JavaScript** and no UI framework: theme switching, language
+switching, GitHub star data and scroll-spy are four small vanilla-TypeScript islands. There are **no
+third-party requests** — no analytics, no trackers, no CDN, no cookies. Fonts are self-hosted, subset
+to `latin` + `latin-ext`.
 
----
+With JavaScript disabled the site is still fully readable — all seven sections and twelve project
+cards render server-side; only the theme button, live star counts and the active-section highlight
+go away.
+
+The Content-Security-Policy carries **no `'unsafe-inline'`**. Since GitHub Pages cannot set HTTP
+headers, the policy is delivered via `<meta>`; inline stylesheets are disabled at build time and the
+one remaining inline block (JSON-LD) has its sha256 injected into the policy by a build integration.
+
+All site copy lives in two data files bound by a shared TypeScript contract, so the two languages
+cannot silently drift — omitting a field in one of them fails the build. Every build is scanned for
+missing `rel="noopener noreferrer"`, unfilled CSP hashes, `unsafe-*` directives and unreplaced
+content placeholders.
 
 ## Lisans
 
-Kod MIT. İçerik (metinler, CV, görseller) telif hakkı saklıdır.
+Kod [MIT](LICENSE). İçerik — biyografi metinleri, proje açıklamaları, CV ve kişisel görseller —
+telif hakkı saklıdır.

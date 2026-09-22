@@ -278,8 +278,7 @@ export const tr = {
 
   uses: {
     heading: 'Kullandıklarım',
-    intro:
-      'Günlük işimde dayandığım altyapı ve araçlar. Donanım satırları siz doldurana kadar placeholder olarak duruyor.',
+    intro: 'Günlük işimde dayandığım altyapı ve araçlar.',
     groups: [
       {
         title: 'Altyapı',
@@ -315,14 +314,6 @@ export const tr = {
           { name: 'ELK', note: 'Merkezî log.' },
           { name: 'Sentry', note: 'Uygulama hata takibi.' },
           { name: 'Wakapi (self-hosted)', note: 'Kendi kodlama zamanı analitiğim.' },
-        ],
-      },
-      {
-        title: 'Donanım',
-        items: [
-          { name: '<PLACEHOLDER_LAPTOP>', note: 'Ana geliştirme makinesi.' },
-          { name: '<PLACEHOLDER_HOMELAB>', note: 'Proxmox node donanımı.' },
-          { name: '<PLACEHOLDER_PERIPHERALS>', note: 'Ekran, klavye, giriş cihazları.' },
         ],
       },
     ],

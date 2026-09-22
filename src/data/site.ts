@@ -7,22 +7,18 @@ import { join } from 'node:path';
  */
 
 /**
- * E-postanız.
+ * İletişim e-postası. Boş bırakılırsa İletişim bölümündeki e-posta satırı
+ * "yakında" olarak gösterilir; kırık bir `mailto:` linki asla basılmaz.
  *
- * Aşağıdaki placeholder'ı gerçek adresinizle değiştirin:
- *   export const EMAIL = 'ornek@alanadi.com';
- *
- * Placeholder olduğu sürece İletişim bölümünde e-posta satırı "yakında"
- * olarak gösterilir — kırık bir mailto linki ASLA basılmaz.
- * Adres HTML karakter entity'lerine çevrilerek yazılır (naif scraper koruması),
- * bu dönüşüm otomatiktir, siz düz metin yazın.
+ * Adres düz metin olarak yazılır — HTML karakter entity'lerine çevirme işi
+ * otomatiktir (bkz. `toHtmlEntities`), naif e-posta toplayıcılarına karşı.
  */
-export const EMAIL = '<PLACEHOLDER_EMAIL>';
+export const EMAIL = 's.ibrahimdrms@gmail.com';
 
-export const isEmailConfigured = !EMAIL.startsWith('<PLACEHOLDER');
+export const isEmailConfigured = EMAIL.trim().length > 0;
 
 /** CV dosya adı — public/cv/ altına koyduğunuzda CTA otomatik görünür. */
-export const CV_FILENAME = 'HALIL_IBRAHIM_DURMUS_CV_INTL.pdf';
+export const CV_FILENAME = 'HALIL_IBRAHIM_DURMUS_CV.pdf';
 
 /**
  * CV linki build sırasında dosya sistemi kontrolü ile belirlenir.
