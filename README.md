@@ -12,6 +12,7 @@
 </div>
 
 ---
+
 ## Lisans
 
 Kod [MIT](LICENSE). İçerik — biyografi metinleri, proje açıklamaları, CV ve kişisel görseller —
