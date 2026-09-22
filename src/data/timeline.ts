@@ -77,6 +77,7 @@ export const volunteering = [
   { id: 'member', since: '2023-10' },
   { id: 'board', since: '2024-09' },
   { id: 'lead', since: '2025-09' },
+  { id: 'handover', since: '2026-09' },
 ] as const satisfies readonly VolunteeringStep[];
 
 export type VolunteeringId = (typeof volunteering)[number]['id'];

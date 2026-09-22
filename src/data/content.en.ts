@@ -257,9 +257,10 @@ export const en = {
       member: 'Member',
       board: 'Board Member',
       lead: 'Manager',
+      handover: 'Remote support',
     },
     volunteeringNote:
-      'Planning the community’s annual activity programme, coordinating the board, representing the community within the university, and running hands-on technical workshops that introduce students to security fundamentals.',
+      'As manager I planned the community’s annual activity programme, coordinated the board, represented the community within the university, and ran hands-on technical workshops introducing students to security fundamentals. I handed the role over in September 2026 and continue to support the community remotely.',
     certifications: [
       { name: 'OSCP+', full: 'OffSec Certified Professional' },
       { name: 'CKA', full: 'Certified Kubernetes Administrator' },
