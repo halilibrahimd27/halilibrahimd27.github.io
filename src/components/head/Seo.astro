@@ -1,0 +1,102 @@
+---
+import type { Locale } from '../../data/types';
+import { site } from '../../data/site';
+import { HREFLANG, LOCALES, DEFAULT_LOCALE, type PageKey } from '../../i18n/config';
+import { absoluteUrl, assetHref, pageHref } from '../../i18n/utils';
+
+interface Props {
+  locale: Locale;
+  page: PageKey;
+  title: string;
+  description: string;
+  ogImageAlt: string;
+  /** 404 gibi indekslenmemesi gereken sayfalar için. */
+  noindex?: boolean;
+}
+
+const { locale, page, title, description, ogImageAlt, noindex = false } = Astro.props;
+
+const path = pageHref(locale, page);
+const canonical = absoluteUrl(path, Astro.site);
+const ogImage = absoluteUrl(assetHref(`og/og-${locale}.png`), Astro.site);
+
+/**
+ * CSP — GitHub Pages HTTP header veremediği için <meta> ile kuruluyor.
+ * __CSP_SCRIPT_HASHES__ yer tutucusu build sonunda integrations/csp.ts
+ * tarafından inline script'lerin sha256'ları ile doldurulur.
+ *
+ * Dev sunucusunda emit EDİLMEZ: Astro'nun HMR inline script'lerini bloklardı.
+ *
+ * frame-ancestors / sandbox / report-uri burada YOK — <meta> ile kurulan
+ * CSP'de tarayıcılar bu üçünü yok sayar, varmış gibi göstermenin anlamı olmaz.
+ */
+const csp = [
+  "default-src 'self'",
+  "script-src 'self'__CSP_SCRIPT_HASHES__",
+  "style-src 'self'",
+  "img-src 'self' data:",
+  "font-src 'self'",
+  "connect-src 'self' https://api.github.com",
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'none'",
+  'upgrade-insecure-requests',
+].join('; ');
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+{import.meta.env.PROD && <meta http-equiv="Content-Security-Policy" content={csp} />}
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="author" content={site.name} />
+{noindex && <meta name="robots" content="noindex, follow" />}
+
+<meta name="color-scheme" content="dark light" />
+<meta name="theme-color" content={site.themeColorDark} media="(prefers-color-scheme: dark)" />
+<meta name="theme-color" content={site.themeColorLight} media="(prefers-color-scheme: light)" />
+
+<link rel="icon" href={assetHref('favicon.svg')} type="image/svg+xml" />
+<link rel="apple-touch-icon" href={assetHref('apple-touch-icon.png')} />
+
+{!noindex && <link rel="canonical" href={canonical} />}
+
+{!noindex &&
+  LOCALES.map((alt) => (
+    <link
+      rel="alternate"
+      hreflang={HREFLANG[alt]}
+      href={absoluteUrl(pageHref(alt, page), Astro.site)}
+    />
+  ))}
+{!noindex && (
+  <link
+    rel="alternate"
+    hreflang="x-default"
+    href={absoluteUrl(pageHref(DEFAULT_LOCALE, page), Astro.site)}
+  />
+)}
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={site.name} />
+<meta property="og:locale" content={locale === 'tr' ? 'tr_TR' : 'en_US'} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={ogImageAlt} />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+<meta name="twitter:image:alt" content={ogImageAlt} />
+
+<link rel="sitemap" href={assetHref('sitemap-index.xml')} />
+
+<!-- Tema ve hareket başlangıcı: senkron, harici (CSP script-src 'self'). -->
+<script is:inline src={assetHref('theme-init.js')}></script>

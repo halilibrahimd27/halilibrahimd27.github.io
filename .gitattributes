@@ -1,0 +1,10 @@
+# Depoda ve checkout'ta her yerde LF.
+# Prettier'ın varsayılanı endOfLine: "lf" — Windows'ta CRLF'e dönen dosyalar
+# CI'daki `pnpm format:check` adımını kırardı.
+* text=auto eol=lf
+
+# İkili dosyalar dönüştürülmesin.
+*.woff2 binary
+*.png binary
+*.pdf binary
+*.ico binary

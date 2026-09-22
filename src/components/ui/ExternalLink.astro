@@ -1,0 +1,23 @@
+---
+/**
+ * Dış link — rel="noopener noreferrer" yapı gereği garanti.
+ *
+ * Sitedeki HER dış bağlantı bu bileşenden geçer; böylece bir yerde unutulması
+ * mümkün değil. CI'da ayrıca scripts/check-external-links.mjs ile dist
+ * çıktısındaki tüm target="_blank" linkleri doğrulanır.
+ */
+interface Props {
+  href: string;
+  class?: string;
+  /** Ekran okuyucuya "yeni sekmede açılır" bilgisi. */
+  newTabLabel: string;
+  id?: string;
+}
+
+const { href, class: className, newTabLabel, id } = Astro.props;
+---
+
+<a href={href} target="_blank" rel="noopener noreferrer" class={className} id={id}>
+  <slot />
+  <span class="sr-only">({newTabLabel})</span>
+</a>

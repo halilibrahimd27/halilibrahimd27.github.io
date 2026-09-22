@@ -1,0 +1,47 @@
+---
+import type { Locale } from '../../data/types';
+import type { SiteContent } from '../../data';
+import type { ProjectFacts } from '../../data/types';
+import ExternalLink from './ExternalLink.astro';
+import RepoMeta from './RepoMeta.astro';
+
+interface Props {
+  project: ProjectFacts;
+  tagline: string;
+  locale: Locale;
+  content: SiteContent;
+}
+
+const { project, tagline, locale, content } = Astro.props;
+const { ui } = content;
+const repoUrl = `https://github.com/${project.repo}`;
+---
+
+{/* Kompakt satır — "Diğer projeler" listesi için konsol tablosu hissi. */}
+<li
+  class="hover:bg-raised grid gap-x-6 gap-y-1.5 border-b border-[var(--color-line)] px-2 py-4 transition-colors sm:grid-cols-[minmax(0,14rem)_minmax(0,1fr)] sm:items-baseline"
+  data-repo={project.id}
+  data-reveal
+>
+  <div class="min-w-0">
+    <h4 class="font-mono text-[14px] break-words">
+      <ExternalLink
+        href={repoUrl}
+        class="hover:text-accent-fg transition-colors"
+        newTabLabel={ui.externalLink}
+      >
+        {project.id}
+      </ExternalLink>
+    </h4>
+    <RepoMeta stars={project.stars} updated={project.updated} locale={locale} content={content} />
+  </div>
+
+  <div class="min-w-0">
+    <p class="text-muted mb-2 text-[14px] leading-relaxed">{tagline}</p>
+    <ul class="flex flex-wrap gap-1.5">
+      {project.tech.map((tech) => (
+        <li class="tag">{tech}</li>
+      ))}
+    </ul>
+  </div>
+</li>

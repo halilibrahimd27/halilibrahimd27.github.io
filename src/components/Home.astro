@@ -1,0 +1,40 @@
+---
+import type { Locale } from '../data/types';
+import type { SiteContent } from '../data';
+import About from './sections/About.astro';
+import Contact from './sections/Contact.astro';
+import Education from './sections/Education.astro';
+import Experience from './sections/Experience.astro';
+import Hero from './sections/Hero.astro';
+import Principles from './sections/Principles.astro';
+import Projects from './sections/Projects.astro';
+import Skills from './sections/Skills.astro';
+
+/**
+ * Ana sayfanın bölüm sırası — TR ve EN sayfaları bunu paylaşır, böylece iki
+ * dilin yapısı kod düzeyinde de ayrışamaz.
+ *
+ * `index` değerleri bölüm başlıklarındaki 01 / 02 … numaralarıdır ve
+ * SideRail'deki sıralamayla birebir aynıdır.
+ */
+interface Props {
+  content: SiteContent;
+  locale: Locale;
+}
+
+const { content, locale } = Astro.props;
+---
+
+<Hero content={content} />
+<About content={content} index={1} />
+<Experience content={content} locale={locale} index={2} />
+<Projects content={content} locale={locale} index={3} />
+<Skills content={content} index={4} />
+<Principles content={content} index={5} />
+<Education content={content} locale={locale} index={6} />
+<Contact content={content} index={7} />
+
+{/* GitHub yıldız/tarih verisi yalnızca proje kartlarının olduğu sayfada yüklenir. */}
+<script>
+  import '../scripts/github-stats';
+</script>

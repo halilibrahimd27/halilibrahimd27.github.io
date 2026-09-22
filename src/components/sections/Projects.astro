@@ -1,0 +1,77 @@
+---
+import type { Locale } from '../../data/types';
+import type { SiteContent } from '../../data';
+import { featuredProjects, moreProjects } from '../../data/projects';
+import { GITHUB_API, site } from '../../data/site';
+import ExternalLink from '../ui/ExternalLink.astro';
+import ProjectCard from '../ui/ProjectCard.astro';
+import ProjectRow from '../ui/ProjectRow.astro';
+import Section from '../ui/Section.astro';
+
+interface Props {
+  content: SiteContent;
+  locale: Locale;
+  index: number;
+}
+
+const { content, locale, index } = Astro.props;
+const { ui } = content;
+---
+
+{/*
+  data-github-endpoint: github-stats.ts bu attribute'u okur. Endpoint kodda
+  değil veride (src/data/site.ts) tanımlıdır.
+*/}
+<Section
+  id="projects"
+  index={index}
+  heading={content.projects.heading}
+  intro={content.projects.intro}
+>
+  <div data-github-endpoint={GITHUB_API}>
+    <ul class="grid gap-4 sm:grid-cols-2">
+      {featuredProjects.map((project, i) => (
+        <li class="flex">
+          <ProjectCard
+            project={project}
+            tagline={content.projects.items[project.id].tagline}
+            locale={locale}
+            content={content}
+            delay={Math.min(i, 3)}
+          />
+        </li>
+      ))}
+    </ul>
+
+    {moreProjects.length > 0 && (
+      <>
+        <h3
+          class="text-faint mt-14 mb-2 font-mono text-[11px] tracking-[0.14em] uppercase"
+          data-reveal
+        >
+          {content.projects.moreHeading}
+        </h3>
+        <ul class="border-t border-[var(--color-line)]">
+          {moreProjects.map((project) => (
+            <ProjectRow
+              project={project}
+              tagline={content.projects.items[project.id].tagline}
+              locale={locale}
+              content={content}
+            />
+          ))}
+        </ul>
+      </>
+    )}
+
+    <p class="mt-6" data-reveal>
+      <ExternalLink
+        href={`${site.github.url}?tab=repositories`}
+        class="link font-mono text-[13px]"
+        newTabLabel={ui.externalLink}
+      >
+        {content.projects.allReposLabel} →
+      </ExternalLink>
+    </p>
+  </div>
+</Section>

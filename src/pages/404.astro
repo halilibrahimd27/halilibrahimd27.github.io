@@ -1,0 +1,42 @@
+---
+import Base from '../layouts/Base.astro';
+import { getContent } from '../data';
+import { LOCALES } from '../i18n/config';
+import { pageHref } from '../i18n/utils';
+
+/**
+ * GitHub Pages bilinmeyen her yol için TEK bir 404.html sunar ve dili
+ * seçemez — bu yüzden sayfa iki dilli. Her blok kendi `lang` attribute'unu
+ * taşır, ekran okuyucu doğru telaffuz eder.
+ */
+const content = getContent('tr');
+const blocks = LOCALES.map((locale) => ({ locale, copy: getContent(locale) }));
+---
+
+<Base
+  content={content}
+  locale="tr"
+  page="home"
+  title={`404 — ${content.notFound.title}`}
+  description={content.notFound.body}
+  noindex
+>
+  <div class="flex min-h-[60vh] flex-col justify-center py-16">
+    <h1 class="text-accent-fg mb-6 font-mono text-[clamp(3rem,12vw,5rem)] leading-none font-bold">
+      {content.notFound.code}
+      <span class="sr-only"> — {content.notFound.title}</span>
+    </h1>
+
+    <div class="grid gap-8 sm:grid-cols-2">
+      {blocks.map(({ locale, copy }) => (
+        <section lang={copy.meta.htmlLang} class="border-t border-[var(--color-line)] pt-4">
+          <h2 class="mb-2 text-lg">{copy.notFound.title}</h2>
+          <p class="text-muted mb-4 max-w-[46ch] text-[15px]">{copy.notFound.body}</p>
+          <a href={pageHref(locale, 'home')} class="link font-mono text-[13px]">
+            ← {copy.ui.backHome}
+          </a>
+        </section>
+      ))}
+    </div>
+  </div>
+</Base>

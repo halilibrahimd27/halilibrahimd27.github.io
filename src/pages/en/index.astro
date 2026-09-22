@@ -1,0 +1,12 @@
+---
+import Home from '../../components/Home.astro';
+import Base from '../../layouts/Base.astro';
+import { getContent } from '../../data';
+
+const locale = 'en' as const;
+const content = getContent(locale);
+---
+
+<Base content={content} locale={locale} page="home" withSectionNav withJsonLd>
+  <Home content={content} locale={locale} />
+</Base>

@@ -1,0 +1,81 @@
+---
+import type { SiteContent } from '../../data';
+import { EMAIL, hasCv, isEmailConfigured, site, toHtmlEntities } from '../../data/site';
+import { assetHref } from '../../i18n/utils';
+import ExternalLink from '../ui/ExternalLink.astro';
+import Section from '../ui/Section.astro';
+
+interface Props {
+  content: SiteContent;
+  index: number;
+}
+
+const { content, index } = Astro.props;
+const { ui, contact } = content;
+
+/**
+ * E-posta gizleme: adres ve mailto hedefi HTML entity'lerine çevrilip ham
+ * HTML olarak basılır. Astro attribute'ları kaçış karakterlerinden geçirdiği
+ * için anchor'ın tamamı set:html ile yazılmak zorunda.
+ *
+ * EMAIL hâlâ <PLACEHOLDER_EMAIL> ise link HİÇ basılmaz; yerine "yakında"
+ * metni çıkar — kırık bir mailto linki asla yayına gitmez.
+ */
+const emailAnchor = isEmailConfigured
+  ? `<a class="link font-mono text-[14px] break-all" href="${toHtmlEntities(`mailto:${EMAIL}`)}">${toHtmlEntities(EMAIL)}</a>`
+  : null;
+---
+
+<Section id="contact" index={index} heading={contact.heading} intro={contact.intro}>
+  <dl class="grid gap-x-8 gap-y-0 sm:grid-cols-[8rem_1fr]" data-reveal>
+    <dt class="text-faint border-t border-[var(--color-line)] pt-4 font-mono text-[11px] tracking-[0.14em] uppercase sm:pb-4">
+      {contact.emailLabel}
+    </dt>
+    <dd class="border-[var(--color-line)] pb-4 sm:border-t sm:pt-4">
+      {emailAnchor ? (
+        <Fragment set:html={emailAnchor} />
+      ) : (
+        <span class="text-faint font-mono text-[14px]">{contact.emailPending}</span>
+      )}
+    </dd>
+
+    <dt class="text-faint border-t border-[var(--color-line)] pt-4 font-mono text-[11px] tracking-[0.14em] uppercase sm:pb-4">
+      {contact.githubLabel}
+    </dt>
+    <dd class="border-[var(--color-line)] pb-4 sm:border-t sm:pt-4">
+      <ExternalLink
+        href={site.github.url}
+        class="link font-mono text-[14px] break-all"
+        newTabLabel={ui.externalLink}
+      >
+        github.com/{site.github.user}
+      </ExternalLink>
+    </dd>
+
+    <dt class="text-faint border-t border-[var(--color-line)] pt-4 font-mono text-[11px] tracking-[0.14em] uppercase sm:pb-4">
+      {contact.linkedinLabel}
+    </dt>
+    <dd class="border-[var(--color-line)] pb-4 sm:border-t sm:pt-4">
+      <ExternalLink
+        href={site.linkedin.url}
+        class="link font-mono text-[14px] break-all"
+        newTabLabel={ui.externalLink}
+      >
+        linkedin.com/in/{site.linkedin.handle}
+      </ExternalLink>
+    </dd>
+
+    {hasCv && (
+      <>
+        <dt class="text-faint border-t border-[var(--color-line)] pt-4 font-mono text-[11px] tracking-[0.14em] uppercase sm:pb-4">
+          {contact.cvLabel}
+        </dt>
+        <dd class="border-[var(--color-line)] pb-4 sm:border-t sm:pt-4">
+          <a href={assetHref(site.cvPath)} class="link font-mono text-[14px]" download>
+            {content.hero.ctaCv}
+          </a>
+        </dd>
+      </>
+    )}
+  </dl>
+</Section>

@@ -1,0 +1,37 @@
+---
+import type { Locale } from '../../data/types';
+import type { SiteContent } from '../../data';
+import { formatDay } from '../../i18n/utils';
+
+interface Props {
+  stars: number;
+  updated: string;
+  locale: Locale;
+  content: SiteContent;
+}
+
+const { stars, updated, locale, content } = Astro.props;
+const { ui } = content;
+---
+
+{/*
+  Sunucuda statik veriyle TAM render edilir; github-stats.ts yalnızca
+  metinleri yerinde günceller. Satırın yüksekliği sabit (min-h-5) olduğu
+  için canlı veri gelince düzen kaymaz.
+*/}
+<p class="meta flex min-h-5 flex-wrap items-center gap-x-3 gap-y-1">
+  <span class="inline-flex items-center gap-1" data-stars hidden={stars === 0}>
+    <svg class="h-3 w-3" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+      <path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"></path>
+    </svg>
+    <span data-stars-value>{stars}</span>
+    <span class="sr-only">{ui.stars}</span>
+  </span>
+
+  <span class="inline-flex items-center gap-1.5">
+    <span>{ui.updatedPrefix}</span>
+    <time data-updated datetime={updated}>
+      {formatDay(updated, locale)}
+    </time>
+  </span>
+</p>

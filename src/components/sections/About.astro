@@ -1,0 +1,39 @@
+---
+import type { SiteContent } from '../../data';
+import Section from '../ui/Section.astro';
+
+interface Props {
+  content: SiteContent;
+  index: number;
+}
+
+const { content, index } = Astro.props;
+const { about } = content;
+---
+
+<Section id="about" index={index} heading={about.heading}>
+  <div class="grid gap-10 lg:grid-cols-[1fr_auto] lg:gap-16">
+    <div class="max-w-[68ch] space-y-5">
+      {about.paragraphs.map((paragraph, i) => (
+        <p
+          class="text-muted text-[15px] leading-relaxed"
+          data-reveal
+          data-reveal-delay={Math.min(i, 4)}
+        >
+          {paragraph}
+        </p>
+      ))}
+    </div>
+
+    <dl class="lg:w-56" data-reveal data-reveal-delay="2">
+      <dt class="text-faint mb-2 font-mono text-[11px] tracking-[0.14em] uppercase">
+        {about.languagesLabel}
+      </dt>
+      {about.languages.map((language) => (
+        <dd class="text-muted border-t border-[var(--color-line)] py-2 font-mono text-[13px]">
+          {language}
+        </dd>
+      ))}
+    </dl>
+  </div>
+</Section>

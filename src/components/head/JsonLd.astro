@@ -1,0 +1,47 @@
+---
+import type { Locale } from '../../data/types';
+import { site } from '../../data/site';
+import { education, experience } from '../../data/timeline';
+import { skillGroups } from '../../data/skills';
+import { absoluteUrl, pageHref } from '../../i18n/utils';
+
+interface Props {
+  locale: Locale;
+  jobTitle: string;
+  description: string;
+}
+
+const { locale, jobTitle, description } = Astro.props;
+
+/* Şu an sürmekte olan iş (end === null) — worksFor için. */
+const current = experience.find((entry) => entry.end === null);
+
+/* knowsAbout: yetenek verisinden türetilir, elle ikinci bir liste tutulmaz. */
+const knowsAbout = skillGroups.flatMap((group) => group.items);
+
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  jobTitle,
+  description,
+  url: absoluteUrl(pageHref(locale, 'home'), Astro.site),
+  sameAs: [site.github.url, site.linkedin.url],
+  address: {
+    '@type': 'PostalAddress',
+    addressCountry: 'TR',
+  },
+  knowsLanguage: [
+    { '@type': 'Language', name: 'Turkish' },
+    { '@type': 'Language', name: 'English' },
+  ],
+  knowsAbout,
+  alumniOf: [...new Set(education.map((entry) => entry.org))].map((org) => ({
+    '@type': 'CollegeOrUniversity',
+    name: org,
+  })),
+  ...(current ? { worksFor: { '@type': 'Organization', name: current.org } } : {}),
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(person)}></script>

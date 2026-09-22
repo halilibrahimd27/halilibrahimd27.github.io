@@ -1,0 +1,22 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "include": [".astro/types.d.ts", "**/*.ts", "**/*.astro"],
+  // scripts/og.ts kasıtlı olarak dışarıda: bağımlılıkları (satori, resvg)
+  // kalıcı olarak kurulu DEĞİL — tek seferlik görsel üretimi için geçici
+  // kurulur. Bkz. scripts/og.ts başlığı ve README → "OG görselleri".
+  "exclude": ["dist", "node_modules", "scripts/og.ts"],
+  "compilerOptions": {
+    "strictNullChecks": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "verbatimModuleSyntax": true,
+    "baseUrl": ".",
+    "paths": {
+      "@data/*": ["src/data/*"],
+      "@components/*": ["src/components/*"],
+      "@layouts/*": ["src/layouts/*"],
+      "@i18n/*": ["src/i18n/*"]
+    }
+  }
+}

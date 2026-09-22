@@ -1,0 +1,47 @@
+---
+import type { Locale } from '../data/types';
+import type { SiteContent } from '../data';
+import { pageHref } from '../i18n/utils';
+
+interface Props {
+  content: SiteContent;
+  locale: Locale;
+}
+
+const { content, locale } = Astro.props;
+const { uses, ui } = content;
+---
+
+<div class="py-12 sm:py-16">
+  <h1 class="mb-4 text-[clamp(1.75rem,5vw,2.5rem)] leading-tight font-bold tracking-tight">
+    {uses.heading}
+  </h1>
+  <p class="text-muted mb-12 max-w-[62ch] text-[15px] leading-relaxed">{uses.intro}</p>
+
+  <div class="space-y-10">
+    {uses.groups.map((group, i) => (
+      <section aria-labelledby={`uses-${i}`} data-reveal data-reveal-delay={Math.min(i, 3)}>
+        <h2
+          id={`uses-${i}`}
+          class="text-accent-fg mb-4 border-b border-[var(--color-line)] pb-2 font-mono text-[11px] tracking-[0.14em] uppercase"
+        >
+          {group.title}
+        </h2>
+        <dl class="grid gap-x-8 gap-y-3 sm:grid-cols-[minmax(0,14rem)_minmax(0,1fr)]">
+          {group.items.map((item) => (
+            <>
+              <dt class="font-mono text-[14px] break-words">{item.name}</dt>
+              <dd class="text-muted mb-2 text-[14px] sm:mb-0">{item.note}</dd>
+            </>
+          ))}
+        </dl>
+      </section>
+    ))}
+  </div>
+
+  <p class="mt-14">
+    <a href={pageHref(locale, 'home')} class="link font-mono text-[13px]">
+      ← {ui.backHome}
+    </a>
+  </p>
+</div>

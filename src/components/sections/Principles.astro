@@ -1,0 +1,30 @@
+---
+import type { SiteContent } from '../../data';
+import Section from '../ui/Section.astro';
+
+interface Props {
+  content: SiteContent;
+  index: number;
+}
+
+const { content, index } = Astro.props;
+---
+
+<Section
+  id="principles"
+  index={index}
+  heading={content.principles.heading}
+  intro={content.principles.intro}
+>
+  <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {content.principles.items.map((principle, i) => (
+      <li class="card flex flex-col gap-2 p-5" data-reveal data-reveal-delay={Math.min(i, 3)}>
+        <span class="section-index" aria-hidden="true">
+          {String(i + 1).padStart(2, '0')}
+        </span>
+        <h3 class="text-[15px] leading-snug">{principle.title}</h3>
+        <p class="text-muted text-[14px] leading-relaxed">{principle.body}</p>
+      </li>
+    ))}
+  </ul>
+</Section>

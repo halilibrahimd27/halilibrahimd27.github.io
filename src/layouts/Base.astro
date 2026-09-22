@@ -1,0 +1,81 @@
+---
+import '../styles/global.css';
+
+import type { Locale } from '../data/types';
+import type { SiteContent } from '../data';
+import type { PageKey } from '../i18n/config';
+import JsonLd from '../components/head/JsonLd.astro';
+import Seo from '../components/head/Seo.astro';
+import SideRail from '../components/nav/SideRail.astro';
+import TopBar from '../components/nav/TopBar.astro';
+import Footer from '../components/sections/Footer.astro';
+
+interface Props {
+  content: SiteContent;
+  locale: Locale;
+  page: PageKey;
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+  /** Ana sayfa: masaüstünde yan bölüm navigasyonu + mobil chip satırı. */
+  withSectionNav?: boolean;
+  withJsonLd?: boolean;
+  showUsesLink?: boolean;
+}
+
+const {
+  content,
+  locale,
+  page,
+  title = content.meta.title,
+  description = content.meta.description,
+  noindex = false,
+  withSectionNav = false,
+  withJsonLd = false,
+  showUsesLink = true,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang={content.meta.htmlLang}>
+  <head>
+    <Seo
+      locale={locale}
+      page={page}
+      title={title}
+      description={description}
+      ogImageAlt={content.meta.ogImageAlt}
+      noindex={noindex}
+    />
+    {withJsonLd && (
+      <JsonLd locale={locale} jobTitle={content.hero.role} description={description} />
+    )}
+  </head>
+
+  <body class="flex min-h-screen flex-col">
+    <a href="#main" class="skip-link">
+      {content.ui.skipToContent}
+    </a>
+
+    <TopBar locale={locale} page={page} content={content} showSections={withSectionNav} />
+
+    <div class="mx-auto w-full max-w-[var(--container-shell)] grow px-4 sm:px-8">
+      <div class:list={[withSectionNav && 'lg:grid lg:grid-cols-[12rem_minmax(0,1fr)] lg:gap-16']}>
+        {withSectionNav && <SideRail content={content} />}
+
+        <main id="main" class="min-w-0 max-w-[var(--container-content)]">
+          <slot />
+        </main>
+      </div>
+    </div>
+
+    <Footer content={content} locale={locale} showUsesLink={showUsesLink} />
+
+    {/* Island'lar: tema değiştirici, dil değiştirici, scroll-spy + reveal. */}
+    <script>
+      import '../scripts/theme-toggle';
+      import '../scripts/lang-switch';
+      import '../scripts/nav';
+    </script>
+  </body>
+</html>

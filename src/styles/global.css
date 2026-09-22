@@ -1,0 +1,456 @@
+@import 'tailwindcss';
+@import './fonts.css';
+
+/* ────────────────────────────────────────────────────────────────────────────
+ * TASARIM TOKEN'LARI
+ *
+ * Koyu tema varsayılan. Açık tema iki yoldan gelir:
+ *   1) JS yokken  → @media (prefers-color-scheme: light)
+ *   2) JS varken  → <html data-theme="light">  (theme-init.js, senkron)
+ *
+ * Accent (#4ADE80) açık temada METİN olarak kullanılamaz (beyaz üstünde 1.7:1).
+ * Bu yüzden iki token var: --color-accent dekoratif, --color-accent-fg metin.
+ * ──────────────────────────────────────────────────────────────────────────── */
+
+@theme {
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Koyu tema (varsayılan) */
+  --color-bg: #0b0e11;
+  --color-surface: #11151a;
+  --color-raised: #161b22;
+  --color-line: #1e252d;
+  --color-line-strong: #2a333d;
+  --color-text: #e6edf3;
+  --color-muted: #9ba7b4;
+  --color-faint: #808c99;
+  --color-accent: #4ade80;
+  --color-accent-fg: #4ade80;
+  --color-accent-soft: rgb(74 222 128 / 0.1);
+  --color-ring: #4ade80;
+
+  /* İçerik genişliği — 1100px */
+  --container-content: 68.75rem;
+  /* Yan rail dahil dış kabuk */
+  --container-shell: 88rem;
+
+  --radius-card: 4px;
+
+  /* Scroll-reveal ve hover geçiş süresi */
+  --ease-out-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* Açık tema — JS yokken sistem tercihine uyar */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme='dark']) {
+    --color-bg: #fbfcfd;
+    --color-surface: #ffffff;
+    --color-raised: #f4f6f8;
+    --color-line: #e3e8ee;
+    --color-line-strong: #cbd5e0;
+    --color-text: #0b0e11;
+    --color-muted: #4a5560;
+    --color-faint: #6b7783;
+    --color-accent: #4ade80;
+    --color-accent-fg: #15803d;
+    --color-accent-soft: rgb(21 128 61 / 0.08);
+    --color-ring: #15803d;
+  }
+}
+
+/* Açık tema — kullanıcı toggle ile seçtiyse */
+:root[data-theme='light'] {
+  --color-bg: #fbfcfd;
+  --color-surface: #ffffff;
+  --color-raised: #f4f6f8;
+  --color-line: #e3e8ee;
+  --color-line-strong: #cbd5e0;
+  --color-text: #0b0e11;
+  --color-muted: #4a5560;
+  --color-faint: #6b7783;
+  --color-accent: #4ade80;
+  --color-accent-fg: #15803d;
+  --color-accent-soft: rgb(21 128 61 / 0.08);
+  --color-ring: #15803d;
+}
+
+/* Koyu tema — kullanıcı toggle ile seçtiyse (sistem açık olsa bile) */
+:root[data-theme='dark'] {
+  --color-bg: #0b0e11;
+  --color-surface: #11151a;
+  --color-raised: #161b22;
+  --color-line: #1e252d;
+  --color-line-strong: #2a333d;
+  --color-text: #e6edf3;
+  --color-muted: #9ba7b4;
+  --color-faint: #808c99;
+  --color-accent: #4ade80;
+  --color-accent-fg: #4ade80;
+  --color-accent-soft: rgb(74 222 128 / 0.1);
+  --color-ring: #4ade80;
+}
+
+/* ─── Temel katman ───────────────────────────────────────────────────────── */
+
+@layer base {
+  html {
+    /* Sticky başlığın altına kaymasın diye scroll hedefi payı */
+    scroll-padding-top: 6rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.65;
+    font-feature-settings: 'cv05' 1;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-mono);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  a {
+    color: inherit;
+    text-underline-offset: 3px;
+  }
+
+  /* Görünür focus ring — klavye kullanıcısı için zorunlu */
+  :focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: #0b0e11;
+  }
+
+  /* Hareket azaltma tercihi: TÜM animasyon ve geçişler kapanır */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ─── Scroll-reveal ──────────────────────────────────────────────────────── */
+
+/*
+ * `reveal-ready` sınıfını theme-init.js senkron olarak ekler; yalnızca JS varsa
+ * ve kullanıcı hareket azaltma istemiyorsa. Böylece:
+ *   - JS kapalıyken hiçbir şey gizlenmez, içerik tamamen okunur
+ *   - ilk boyamadan önce gizlenir, "önce görün sonra kaybol" titremesi olmaz
+ */
+:root.reveal-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 320ms var(--ease-out-soft),
+    transform 320ms var(--ease-out-soft);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+:root.reveal-ready [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ─── Yardımcı sınıflar ──────────────────────────────────────────────────── */
+
+@layer components {
+  /* Ölçülü içerik sütunu — her bölüm aynı hizada başlar */
+  .shell {
+    width: 100%;
+    max-width: var(--container-content);
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .shell {
+      padding-inline: 2rem;
+    }
+  }
+
+  /* Ops-console ince ayraç */
+  .hairline {
+    border-color: var(--color-line);
+  }
+
+  /* Bölüm başlığı numarası: 01 / 02 ... */
+  .section-index {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    color: var(--color-accent-fg);
+  }
+
+  /* Kartın üst kenarında hover'da beliren accent hairline */
+  .card {
+    position: relative;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    transition:
+      border-color 200ms var(--ease-out-soft),
+      background-color 200ms var(--ease-out-soft);
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    inset-inline: -1px;
+    top: -1px;
+    height: 2px;
+    background-color: var(--color-accent);
+    opacity: 0;
+    transition: opacity 200ms var(--ease-out-soft);
+  }
+
+  .card:hover,
+  .card:focus-within {
+    border-color: var(--color-line-strong);
+    background-color: var(--color-raised);
+  }
+
+  .card:hover::before,
+  .card:focus-within::before {
+    opacity: 1;
+  }
+
+  /* Teknoloji / dil rozeti */
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    padding: 0.3125rem 0.5rem;
+    border: 1px solid var(--color-line);
+    border-radius: 3px;
+    color: var(--color-muted);
+    white-space: nowrap;
+  }
+
+  /* Mono meta satırı: tarih, yıldız, konum */
+  .meta {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.01em;
+    color: var(--color-faint);
+  }
+
+  /* Metin içi link — accent alt çizgi */
+  .link {
+    color: var(--color-accent-fg);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--color-accent-fg) 40%, transparent);
+    transition: text-decoration-color 160ms var(--ease-out-soft);
+  }
+
+  .link:hover {
+    text-decoration-color: var(--color-accent-fg);
+  }
+
+  /* Birincil / ikincil buton */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    letter-spacing: 0.02em;
+    padding: 0.625rem 1rem;
+    border: 1px solid var(--color-line-strong);
+    border-radius: var(--radius-card);
+    color: var(--color-text);
+    transition:
+      border-color 160ms var(--ease-out-soft),
+      background-color 160ms var(--ease-out-soft),
+      color 160ms var(--ease-out-soft);
+  }
+
+  .btn:hover {
+    border-color: var(--color-accent);
+    background-color: var(--color-accent-soft);
+    color: var(--color-accent-fg);
+  }
+
+  .btn-primary {
+    border-color: var(--color-accent);
+    background-color: var(--color-accent-soft);
+    color: var(--color-accent-fg);
+  }
+
+  .btn-primary:hover {
+    background-color: color-mix(in srgb, var(--color-accent) 18%, transparent);
+  }
+}
+
+/* Mobil yatay kaydırmalı bölüm chip'lerinde kaydırma çubuğunu gizle */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* JS gerektiren kontroller: JS yoksa hiç görünmesin (kırık arayüz olmasın) */
+:root:not(.js) [data-requires-js] {
+  display: none !important;
+}
+
+/* ─── Navigasyon ─────────────────────────────────────────────────────────── */
+
+/*
+ * Aktif bölüm işareti scroll-spy (nav.ts) tarafından data-active ile verilir.
+ * JS kapalıyken linkler normal çapa linki olarak çalışır, sadece vurgu olmaz.
+ */
+.nav-chip:hover,
+.nav-rail:hover {
+  color: var(--color-text);
+}
+
+.nav-chip[data-active='true'] {
+  color: var(--color-accent-fg);
+  background-color: var(--color-accent-soft);
+}
+
+.nav-rail[data-active='true'] {
+  color: var(--color-accent-fg);
+}
+
+.nav-rail-tick {
+  display: block;
+  width: 2px;
+  height: 12px;
+  flex: none;
+  border-radius: 1px;
+  background-color: var(--color-line-strong);
+  transition:
+    background-color 160ms var(--ease-out-soft),
+    height 160ms var(--ease-out-soft);
+}
+
+.nav-rail[data-active='true'] .nav-rail-tick {
+  height: 20px;
+  background-color: var(--color-accent);
+}
+
+/* Skip-link: yalnızca klavyeyle odaklanınca görünür */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: 0.5rem;
+  z-index: 100;
+  transform: translateY(-200%);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent-fg);
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  padding: 0.5rem 0.875rem;
+  border-radius: var(--radius-card);
+  transition: transform 160ms var(--ease-out-soft);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* ─── Tema değiştirici ikonları ──────────────────────────────────────────── */
+
+/*
+ * İkon, GEÇİLECEK temayı gösterir: koyudayken güneş, açıktayken ay.
+ * Kurallar renk token'larıyla birebir aynı cascade'i izler; böylece kullanıcı
+ * henüz bir tercih kaydetmemişken (data-theme yokken) de doğru ikon çıkar.
+ */
+.theme-icon-sun {
+  display: block;
+}
+
+.theme-icon-moon {
+  display: none;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme='dark']) .theme-icon-sun {
+    display: none;
+  }
+
+  :root:not([data-theme='dark']) .theme-icon-moon {
+    display: block;
+  }
+}
+
+:root[data-theme='light'] .theme-icon-sun {
+  display: none;
+}
+
+:root[data-theme='light'] .theme-icon-moon {
+  display: block;
+}
+
+:root[data-theme='dark'] .theme-icon-sun {
+  display: block;
+}
+
+:root[data-theme='dark'] .theme-icon-moon {
+  display: none;
+}
+
+/* ─── Scroll-reveal gecikme adımları ─────────────────────────────────────── */
+
+/*
+ * Gecikmeler NEDEN inline style değil:
+ * CSP'deki `style-src 'self'` inline style ATTRIBUTE'larını da bloklar ve
+ * hash'ler style attribute'larına uygulanmaz ('unsafe-hashes' gerekirdi).
+ * Bu yüzden gecikme, sınıf yerine veri attribute'u ile seçiliyor —
+ * politikayı gevşetmeden aynı kademeli giriş elde ediliyor.
+ */
+[data-reveal-delay='1'] {
+  --reveal-delay: 60ms;
+}
+
+[data-reveal-delay='2'] {
+  --reveal-delay: 120ms;
+}
+
+[data-reveal-delay='3'] {
+  --reveal-delay: 180ms;
+}
+
+[data-reveal-delay='4'] {
+  --reveal-delay: 240ms;
+}

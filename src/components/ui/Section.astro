@@ -1,0 +1,32 @@
+---
+import type { SectionId } from '../../data/types';
+
+interface Props {
+  id: SectionId;
+  index: number;
+  heading: string;
+  intro?: string;
+}
+
+const { id, index, heading, intro } = Astro.props;
+const headingId = `${id}-heading`;
+---
+
+<section id={id} aria-labelledby={headingId} class="scroll-mt-28 py-14 sm:py-20">
+  <div class="mb-6 flex items-baseline gap-3 border-b border-[var(--color-line)] pb-3" data-reveal>
+    <span class="section-index shrink-0" aria-hidden="true">
+      {String(index).padStart(2, '0')}
+    </span>
+    <h2 id={headingId} class="text-xl sm:text-2xl">
+      {heading}
+    </h2>
+  </div>
+
+  {intro && (
+    <p class="text-muted mb-8 max-w-[62ch] text-[15px]" data-reveal>
+      {intro}
+    </p>
+  )}
+
+  <slot />
+</section>

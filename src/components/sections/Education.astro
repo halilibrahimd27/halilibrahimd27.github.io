@@ -1,0 +1,100 @@
+---
+import type { Locale } from '../../data/types';
+import type { SiteContent } from '../../data';
+import { education, volunteering } from '../../data/timeline';
+import { formatMonth, formatPeriod, machineDate } from '../../i18n/utils';
+import Section from '../ui/Section.astro';
+
+interface Props {
+  content: SiteContent;
+  locale: Locale;
+  index: number;
+}
+
+const { content, locale, index } = Astro.props;
+const { ui } = content;
+const copy = content.education;
+---
+
+<Section id="education" index={index} heading={copy.heading}>
+  <div class="grid gap-10 lg:grid-cols-2 lg:gap-16">
+    <div class="space-y-10">
+      {/* Eğitim */}
+      <section aria-labelledby="education-school" data-reveal>
+        <h3
+          id="education-school"
+          class="text-accent-fg mb-3 border-b border-[var(--color-line)] pb-2 font-mono text-[11px] tracking-[0.14em] uppercase"
+        >
+          {copy.educationLabel}
+        </h3>
+        <ol class="space-y-5">
+          {education.map((entry) => (
+            <li>
+              <p class="meta mb-1">
+                <time datetime={machineDate(entry.start)}>
+                  {formatPeriod(entry.start, entry.end, locale, ui.present)}
+                </time>
+              </p>
+              <h4 class="text-[15px]">{copy.items[entry.id].degree}</h4>
+              <p class="text-muted font-mono text-[13px]">{entry.org}</p>
+              {copy.items[entry.id].note && (
+                <p class="text-faint mt-1 text-[13px]">{copy.items[entry.id].note}</p>
+              )}
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      {/* Sertifikasyon — "sahip" değil, "hazırlanıyor" olarak işaretli */}
+      <section aria-labelledby="education-certs" data-reveal>
+        <h3
+          id="education-certs"
+          class="text-accent-fg mb-3 border-b border-[var(--color-line)] pb-2 font-mono text-[11px] tracking-[0.14em] uppercase"
+        >
+          {copy.certificationsLabel}
+        </h3>
+        <ul class="space-y-3">
+          {copy.certifications.map((certification) => (
+            <li class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+              <span class="font-mono text-[14px]">{certification.name}</span>
+              <span class="text-muted text-[13px]">{certification.full}</span>
+              <span class="tag border-dashed">{ui.inPreparation}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </div>
+
+    {/* Gönüllülük */}
+    <section aria-labelledby="education-volunteering" data-reveal data-reveal-delay="1">
+      <h3
+        id="education-volunteering"
+        class="text-accent-fg mb-3 border-b border-[var(--color-line)] pb-2 font-mono text-[11px] tracking-[0.14em] uppercase"
+      >
+        {copy.volunteeringLabel}
+      </h3>
+
+      <h4 class="mb-4 text-[15px]">{copy.volunteeringOrg}</h4>
+
+      <ol class="mb-4">
+        {volunteering.map((step, i) => (
+          <li class="relative border-l border-[var(--color-line)] pb-4 pl-5 last:pb-0">
+            <span
+              aria-hidden="true"
+              class:list={[
+                'absolute top-2 -left-[4.5px] h-2 w-2 rounded-[1px]',
+                i === volunteering.length - 1 ? 'bg-accent' : 'bg-[var(--color-line-strong)]',
+              ]}
+            />
+            <p class="meta">
+              <time datetime={machineDate(step.since)}>{formatMonth(step.since, locale)}</time>
+            </p>
+            <p class="text-[14px]">{copy.volunteeringRoles[step.id]}</p>
+          </li>
+        ))}
+      </ol>
+
+      <p class="text-muted max-w-[60ch] text-[14px] leading-relaxed">{copy.volunteeringNote}</p>
+    </section>
+  </div>
+</Section>

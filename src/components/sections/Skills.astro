@@ -1,0 +1,36 @@
+---
+import type { SiteContent } from '../../data';
+import { skillGroups } from '../../data/skills';
+import Section from '../ui/Section.astro';
+
+interface Props {
+  content: SiteContent;
+  index: number;
+}
+
+const { content, index } = Astro.props;
+---
+
+<Section id="skills" index={index} heading={content.skills.heading} intro={content.skills.intro}>
+  <div class="grid gap-x-10 gap-y-8 sm:grid-cols-2">
+    {skillGroups.map((group, i) => (
+      <section
+        aria-labelledby={`skills-${group.id}`}
+        data-reveal
+        data-reveal-delay={Math.min(i, 3)}
+      >
+        <h3
+          id={`skills-${group.id}`}
+          class="text-accent-fg mb-3 border-b border-[var(--color-line)] pb-2 font-mono text-[11px] tracking-[0.14em] uppercase"
+        >
+          {content.skills.groups[group.id]}
+        </h3>
+        <ul class="flex flex-wrap gap-1.5">
+          {group.items.map((item) => (
+            <li class="tag">{item}</li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </div>
+</Section>

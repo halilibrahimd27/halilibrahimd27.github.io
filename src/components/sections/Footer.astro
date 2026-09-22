@@ -1,0 +1,47 @@
+---
+import type { Locale } from '../../data/types';
+import type { SiteContent } from '../../data';
+import { site } from '../../data/site';
+import { pageHref } from '../../i18n/utils';
+import ExternalLink from '../ui/ExternalLink.astro';
+
+interface Props {
+  content: SiteContent;
+  locale: Locale;
+  /** /uses sayfasına link — ana sayfada gösterilir, /uses üzerindeyken gizlenir. */
+  showUsesLink?: boolean;
+}
+
+const { content, locale, showUsesLink = true } = Astro.props;
+const { footer, ui } = content;
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-[var(--color-line)]">
+  <div class="mx-auto flex w-full max-w-[var(--container-shell)] flex-col gap-4 px-4 py-8 sm:px-8 lg:flex-row lg:items-center lg:justify-between">
+    <div class="space-y-1">
+      <p class="meta">
+        © {year} {footer.rights}
+      </p>
+      <p class="meta">{footer.builtWith}</p>
+    </div>
+
+    <nav class="flex flex-wrap items-center gap-x-5 gap-y-2" aria-label={footer.sourceLabel}>
+      {showUsesLink && (
+        <a href={pageHref(locale, 'uses')} class="meta hover:text-accent-fg transition-colors">
+          {content.uses.heading}
+        </a>
+      )}
+      <ExternalLink
+        href={site.github.repo}
+        class="meta hover:text-accent-fg transition-colors"
+        newTabLabel={ui.externalLink}
+      >
+        {footer.sourceLabel}
+      </ExternalLink>
+      <a href="#top" class="meta hover:text-accent-fg transition-colors">
+        {ui.backToTop} ↑
+      </a>
+    </nav>
+  </div>
+</footer>

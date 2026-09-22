@@ -1,0 +1,66 @@
+---
+import type { Locale } from '../../data/types';
+import type { SiteContent } from '../../data';
+import { experience } from '../../data/timeline';
+import { formatPeriod, machineDate } from '../../i18n/utils';
+import Section from '../ui/Section.astro';
+
+interface Props {
+  content: SiteContent;
+  locale: Locale;
+  index: number;
+}
+
+const { content, locale, index } = Astro.props;
+const { ui } = content;
+---
+
+<Section id="experience" index={index} heading={content.experience.heading}>
+  <ol class="relative">
+    {experience.map((entry, i) => {
+      const copy = content.experience.items[entry.id];
+      const period = formatPeriod(entry.start, entry.end, locale, ui.present);
+      const isCurrent = entry.end === null;
+
+      return (
+        <li
+          class="relative border-l border-[var(--color-line)] pb-10 pl-6 last:pb-0 sm:pl-8"
+          data-reveal
+          data-reveal-delay={Math.min(i, 3)}
+        >
+          {/* Zaman çizelgesi işareti — süregelen iş accent, geçmiş nötr */}
+          <span
+            aria-hidden="true"
+            class:list={[
+              'absolute top-1.5 -left-[4.5px] h-2 w-2 rounded-[1px]',
+              isCurrent ? 'bg-accent' : 'bg-[var(--color-line-strong)]',
+            ]}
+          />
+
+          <p class="meta mb-1.5 flex flex-wrap items-center gap-x-2 gap-y-1">
+            <time datetime={machineDate(entry.start)}>{period}</time>
+            <span aria-hidden="true">·</span>
+            <span>{entry.location}</span>
+          </p>
+
+          <h3 class="text-base sm:text-lg">{copy.role}</h3>
+          <p class="text-accent-fg mb-3 font-mono text-[13px]">{entry.org}</p>
+
+          <p class="text-muted mb-3 max-w-[68ch] text-[15px]">{copy.summary}</p>
+
+          <ul class="space-y-2">
+            {copy.bullets.map((bullet) => (
+              <li class="text-muted relative max-w-[70ch] pl-4 text-[14px] leading-relaxed">
+                <span
+                  aria-hidden="true"
+                  class="bg-[var(--color-line-strong)] absolute top-[0.6em] left-0 h-[3px] w-[3px] rounded-[1px]"
+                />
+                {bullet}
+              </li>
+            ))}
+          </ul>
+        </li>
+      );
+    })}
+  </ol>
+</Section>

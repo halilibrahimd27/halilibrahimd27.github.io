@@ -1,0 +1,19 @@
+---
+import Uses from '../components/Uses.astro';
+import Base from '../layouts/Base.astro';
+import { getContent } from '../data';
+
+const locale = 'tr' as const;
+const content = getContent(locale);
+---
+
+<Base
+  content={content}
+  locale={locale}
+  page="uses"
+  title={content.meta.usesTitle}
+  description={content.meta.usesDescription}
+  showUsesLink={false}
+>
+  <Uses content={content} locale={locale} />
+</Base>

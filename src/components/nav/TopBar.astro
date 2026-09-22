@@ -1,0 +1,67 @@
+---
+import type { Locale } from '../../data/types';
+import type { SiteContent } from '../../data';
+import { SECTION_IDS } from '../../data/types';
+import type { PageKey } from '../../i18n/config';
+import { pageHref } from '../../i18n/utils';
+import { site } from '../../data/site';
+import LangSwitch from '../controls/LangSwitch.astro';
+import ThemeToggle from '../controls/ThemeToggle.astro';
+
+interface Props {
+  locale: Locale;
+  page: PageKey;
+  content: SiteContent;
+  /** Ana sayfada bölüm chip'leri gösterilir; /uses gibi sayfalarda gösterilmez. */
+  showSections?: boolean;
+}
+
+const { locale, page, content, showSections = false } = Astro.props;
+const home = pageHref(locale, 'home');
+---
+
+<header class="sticky top-0 z-50 border-b border-[var(--color-line)] bg-[var(--color-bg)]">
+  <div class="mx-auto flex h-16 w-full max-w-[var(--container-shell)] items-center gap-4 px-4 sm:px-8">
+    <a
+      href={home}
+      class="hover:text-accent-fg -mx-2 flex min-w-0 items-center gap-2 rounded-[4px] px-2 py-1 font-mono text-sm font-semibold transition-colors"
+    >
+      <span
+        aria-hidden="true"
+        class="bg-accent inline-block h-2.5 w-2.5 shrink-0 rounded-[1px]"
+      ></span>
+      <span class="truncate">{site.name}</span>
+    </a>
+
+    <div class="ml-auto flex shrink-0 items-center gap-2">
+      <LangSwitch
+        locale={locale}
+        page={page}
+        label={content.ui.switchTo}
+        ariaLabel={`${content.ui.languageLabel}: ${content.ui.switchTo}`}
+      />
+      <ThemeToggle labelLight={content.ui.themeLight} labelDark={content.ui.themeDark} />
+    </div>
+  </div>
+
+  {showSections && (
+    <nav
+      aria-label={content.ui.sectionsLabel}
+      class="no-scrollbar overflow-x-auto border-t border-[var(--color-line)] lg:hidden"
+    >
+      <ul class="mx-auto flex w-max items-center gap-1 px-4 py-2 sm:px-8">
+        {SECTION_IDS.map((id) => (
+          <li>
+            <a
+              href={`#${id}`}
+              data-nav-link={id}
+              class="nav-chip text-muted inline-flex items-center rounded-[3px] px-2.5 py-1.5 font-mono text-xs whitespace-nowrap transition-colors"
+            >
+              {content.nav[id]}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )}
+</header>

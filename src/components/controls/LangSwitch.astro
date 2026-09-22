@@ -1,0 +1,31 @@
+---
+import type { Locale } from '../../data/types';
+import { HREFLANG, otherLocale, type PageKey } from '../../i18n/config';
+import { pageHref } from '../../i18n/utils';
+
+interface Props {
+  locale: Locale;
+  page: PageKey;
+  /** Diğer dilin kendi adı: TR sitede "English", EN sitede "Türkçe". */
+  label: string;
+  ariaLabel: string;
+}
+
+const { locale, page, label, ariaLabel } = Astro.props;
+const target = otherLocale(locale);
+---
+
+{/*
+  Gerçek bir <a> — JS kapalıyken de çalışır, sadece sayfanın başına gider.
+  JS varken lang-switch.ts o anki bölümün #id'sini ekler.
+*/}
+<a
+  data-lang-switch
+  href={pageHref(target, page)}
+  hreflang={HREFLANG[target]}
+  lang={HREFLANG[target]}
+  aria-label={ariaLabel}
+  class="text-muted hover:border-accent hover:text-accent-fg inline-flex h-9 items-center rounded-[4px] border border-[var(--color-line)] px-3 font-mono text-xs tracking-wide transition-colors"
+>
+  {label}
+</a>

@@ -1,0 +1,89 @@
+---
+import type { SiteContent } from '../../data';
+import { hasCv, site } from '../../data/site';
+import { assetHref } from '../../i18n/utils';
+import ExternalLink from '../ui/ExternalLink.astro';
+
+interface Props {
+  content: SiteContent;
+}
+
+const { content } = Astro.props;
+const { hero, ui } = content;
+---
+
+<section id="top" class="scroll-mt-28 pt-12 pb-16 sm:pt-16 sm:pb-20">
+  <p class="text-accent-fg mb-4 font-mono text-xs tracking-[0.16em] uppercase" data-reveal>
+    {hero.role}
+  </p>
+
+  <h1
+    class="mb-6 text-[clamp(2rem,7vw,3.25rem)] leading-[1.08] font-bold tracking-tight"
+    data-reveal
+    data-reveal-delay="1"
+  >
+    {hero.name}
+  </h1>
+
+  <p
+    class="text-muted mb-8 max-w-[64ch] text-[15px] leading-relaxed sm:text-base"
+    data-reveal
+    data-reveal-delay="2"
+  >
+    {hero.positioning}
+  </p>
+
+  <dl
+    class="mb-8 grid gap-x-4 gap-y-1.5 border-y border-[var(--color-line)] py-4 text-[13px] sm:grid-cols-[auto_1fr] sm:gap-y-2"
+    data-reveal
+    data-reveal-delay="3"
+  >
+    <dt class="text-faint font-mono text-[11px] tracking-[0.14em] uppercase sm:pt-0.5">
+      {hero.locationLabel}
+    </dt>
+    <dd class="text-text font-mono text-[13px]">{hero.location}</dd>
+
+    <dt class="text-faint mt-2 font-mono text-[11px] tracking-[0.14em] uppercase sm:mt-0 sm:pt-0.5">
+      {hero.statusLabel}
+    </dt>
+    <dd class="text-text font-mono text-[13px]">{hero.statusValue}</dd>
+  </dl>
+
+  <div class="flex flex-wrap gap-3" data-reveal data-reveal-delay="4">
+    <ExternalLink href={site.github.url} class="btn btn-primary" newTabLabel={ui.externalLink}>
+      <svg class="h-4 w-4" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"></path>
+      </svg>
+      {hero.ctaGithub}
+    </ExternalLink>
+
+    <ExternalLink href={site.linkedin.url} class="btn" newTabLabel={ui.externalLink}>
+      <svg class="h-4 w-4" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+        <path d="M3.6 14H1V5.3h2.6V14ZM2.3 4.2A1.5 1.5 0 1 1 2.3 1.2a1.5 1.5 0 0 1 0 3ZM15 14h-2.6V9.8c0-1-.02-2.3-1.4-2.3-1.4 0-1.6 1.1-1.6 2.2V14H6.8V5.3h2.5v1.2h.04c.35-.66 1.2-1.36 2.48-1.36 2.65 0 3.14 1.74 3.14 4V14Z"></path>
+      </svg>
+      {hero.ctaLinkedin}
+    </ExternalLink>
+
+    {
+      /* CV dosyası public/cv/ altında yoksa bu buton HİÇ render edilmez —
+         kırık link çıkmaz. Bkz. src/data/site.ts → hasCv */
+      hasCv && (
+        <a href={assetHref(site.cvPath)} class="btn" download>
+          <svg
+            class="h-4 w-4"
+            viewBox="0 0 16 16"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M8 1.5v9M4.5 7.5 8 11l3.5-3.5M2.5 13.5h11" />
+          </svg>
+          {hero.ctaCv}
+        </a>
+      )
+    }
+  </div>
+</section>

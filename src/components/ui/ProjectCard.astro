@@ -1,0 +1,64 @@
+---
+import type { Locale } from '../../data/types';
+import type { SiteContent } from '../../data';
+import type { ProjectFacts } from '../../data/types';
+import ExternalLink from './ExternalLink.astro';
+import RepoMeta from './RepoMeta.astro';
+
+interface Props {
+  project: ProjectFacts;
+  tagline: string;
+  locale: Locale;
+  content: SiteContent;
+  /** Scroll-reveal gecikme adımı (0-4). Milisaniye değil — bkz. global.css. */
+  delay?: number;
+}
+
+const { project, tagline, locale, content, delay = 0 } = Astro.props;
+const { ui } = content;
+const repoUrl = `https://github.com/${project.repo}`;
+---
+
+<article
+  class="card flex flex-col gap-4 p-5"
+  data-repo={project.id}
+  data-reveal
+  data-reveal-delay={delay}
+>
+  <div>
+    <h3 class="mb-1.5 font-mono text-[15px] break-words">
+      <ExternalLink
+        href={repoUrl}
+        class="hover:text-accent-fg transition-colors"
+        newTabLabel={ui.externalLink}
+      >
+        {project.id}
+      </ExternalLink>
+    </h3>
+    <RepoMeta stars={project.stars} updated={project.updated} locale={locale} content={content} />
+  </div>
+
+  <p class="text-muted grow text-[14px] leading-relaxed">{tagline}</p>
+
+  <ul class="flex flex-wrap gap-1.5">
+    {project.tech.map((tech) => (
+      <li class="tag">{tech}</li>
+    ))}
+  </ul>
+
+  <div class="flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-[var(--color-line)] pt-3">
+    <ExternalLink href={repoUrl} class="link font-mono text-[13px]" newTabLabel={ui.externalLink}>
+      {ui.sourceCode}
+    </ExternalLink>
+
+    {project.homepage && (
+      <ExternalLink
+        href={project.homepage}
+        class="text-muted hover:text-accent-fg font-mono text-[13px] underline decoration-[var(--color-line-strong)] transition-colors hover:decoration-current"
+        newTabLabel={ui.externalLink}
+      >
+        {ui.liveDemo}
+      </ExternalLink>
+    )}
+  </div>
+</article>
