@@ -280,8 +280,7 @@ export const en = {
 
   uses: {
     heading: 'Uses',
-    intro:
-      'The infrastructure and tooling I rely on day to day. Hardware rows stay as placeholders until they are filled in.',
+    intro: 'The infrastructure and tooling I rely on day to day.',
     groups: [
       {
         title: 'Infrastructure',
@@ -320,14 +319,6 @@ export const en = {
           { name: 'ELK', note: 'Centralised logging.' },
           { name: 'Sentry', note: 'Application error tracking.' },
           { name: 'Wakapi (self-hosted)', note: 'My own coding-time analytics.' },
-        ],
-      },
-      {
-        title: 'Hardware',
-        items: [
-          { name: '<PLACEHOLDER_LAPTOP>', note: 'Primary development machine.' },
-          { name: '<PLACEHOLDER_HOMELAB>', note: 'Proxmox node hardware.' },
-          { name: '<PLACEHOLDER_PERIPHERALS>', note: 'Display, keyboard, input devices.' },
         ],
       },
     ],

@@ -18,8 +18,8 @@ const { ui, contact } = content;
  * HTML olarak basılır. Astro attribute'ları kaçış karakterlerinden geçirdiği
  * için anchor'ın tamamı set:html ile yazılmak zorunda.
  *
- * EMAIL hâlâ <PLACEHOLDER_EMAIL> ise link HİÇ basılmaz; yerine "yakında"
- * metni çıkar — kırık bir mailto linki asla yayına gitmez.
+ * EMAIL boşsa link HİÇ basılmaz; yerine "yakında" metni çıkar — kırık bir
+ * mailto linki asla yayına gitmez.
  */
 const emailAnchor = isEmailConfigured
   ? `<a class="link font-mono text-[14px] break-all" href="${toHtmlEntities(`mailto:${EMAIL}`)}">${toHtmlEntities(EMAIL)}</a>`

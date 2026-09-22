@@ -1,5 +1,6 @@
-# build
+# build (dist-* dahil: farkli BASE ile alinan deneme build'leri)
 dist/
+dist-*/
 .astro/
 
 # deps

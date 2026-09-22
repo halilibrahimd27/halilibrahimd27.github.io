@@ -4,7 +4,7 @@ import globals from 'globals';
 
 export default [
   {
-    ignores: ['dist/**', 'node_modules/**', '.astro/**', 'public/**'],
+    ignores: ['dist/**', 'dist-*/**', 'node_modules/**', '.astro/**', 'public/**'],
   },
   ...ts.configs.recommended,
   ...astro.configs.recommended,

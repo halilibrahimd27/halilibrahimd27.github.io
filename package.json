@@ -16,9 +16,9 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "verify": "node scripts/verify-build.mjs",
     "linkcheck": "linkinator dist --recurse --silent --skip https://",
     "og": "pnpm add -D satori @resvg/resvg-js @fontsource/jetbrains-mono tsx && tsx scripts/og.ts && pnpm remove satori @resvg/resvg-js @fontsource/jetbrains-mono tsx",
-    "check:links": "node scripts/check-external-links.mjs",
     "check:browser": "node scripts/browser-audit.mjs"
   },
   "dependencies": {

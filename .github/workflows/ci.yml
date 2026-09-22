@@ -51,7 +51,7 @@ jobs:
 
       # Dış link rel'leri ve CSP denetimi (bağımlılıksız, kendi script'imiz).
       - name: Verify output
-        run: pnpm check:links
+        run: pnpm verify
 
       # Kırık iç link kontrolü — dış adresler atlanır, CI ağ dalgalanmasına
       # bağlı kalmasın diye.
