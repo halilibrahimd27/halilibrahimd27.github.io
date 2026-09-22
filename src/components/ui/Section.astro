@@ -1,15 +1,22 @@
 ---
-import type { SectionId } from '../../data/types';
+import { SECTION_IDS, type SectionId } from '../../data/types';
 
 interface Props {
   id: SectionId;
-  index: number;
   heading: string;
   intro?: string;
 }
 
-const { id, index, heading, intro } = Astro.props;
+const { id, heading, intro } = Astro.props;
 const headingId = `${id}-heading`;
+
+/*
+ * Görünen "01/02…" numarası SECTION_IDS sırasından TÜRETİLİR.
+ * Daha önce çağıran taraf elle index={1..7} geçiyordu; SideRail ise aynı
+ * numaraları SECTION_IDS'ten üretiyordu. İki ayrı doğruluk kaynağı vardı ve
+ * bir bölüm yeniden sıralandığında sessizce ayrışabilirlerdi.
+ */
+const index = SECTION_IDS.indexOf(id) + 1;
 ---
 
 <section id={id} aria-labelledby={headingId} class="scroll-mt-28 py-14 sm:py-20">

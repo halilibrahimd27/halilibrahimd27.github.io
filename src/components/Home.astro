@@ -14,8 +14,8 @@ import Skills from './sections/Skills.astro';
  * Ana sayfanın bölüm sırası — TR ve EN sayfaları bunu paylaşır, böylece iki
  * dilin yapısı kod düzeyinde de ayrışamaz.
  *
- * `index` değerleri bölüm başlıklarındaki 01 / 02 … numaralarıdır ve
- * SideRail'deki sıralamayla birebir aynıdır.
+ * Bölüm numaraları (01 / 02 …) burada yazılmaz; Section.astro onları
+ * SECTION_IDS sırasından türetir, SideRail de aynı kaynağı kullanır.
  */
 interface Props {
   content: SiteContent;
@@ -26,13 +26,13 @@ const { content, locale } = Astro.props;
 ---
 
 <Hero content={content} />
-<About content={content} index={1} />
-<Experience content={content} locale={locale} index={2} />
-<Projects content={content} locale={locale} index={3} />
-<Skills content={content} index={4} />
-<Principles content={content} index={5} />
-<Education content={content} locale={locale} index={6} />
-<Contact content={content} index={7} />
+<About content={content} />
+<Experience content={content} locale={locale} />
+<Projects content={content} locale={locale} />
+<Skills content={content} />
+<Principles content={content} />
+<Education content={content} locale={locale} />
+<Contact content={content} />
 
 {/* GitHub yıldız/tarih verisi yalnızca proje kartlarının olduğu sayfada yüklenir. */}
 <script>

@@ -11,10 +11,9 @@ import Section from '../ui/Section.astro';
 interface Props {
   content: SiteContent;
   locale: Locale;
-  index: number;
 }
 
-const { content, locale, index } = Astro.props;
+const { content, locale } = Astro.props;
 const { ui } = content;
 ---
 
@@ -22,12 +21,7 @@ const { ui } = content;
   data-github-endpoint: github-stats.ts bu attribute'u okur. Endpoint kodda
   değil veride (src/data/site.ts) tanımlıdır.
 */}
-<Section
-  id="projects"
-  index={index}
-  heading={content.projects.heading}
-  intro={content.projects.intro}
->
+<Section id="projects" heading={content.projects.heading} intro={content.projects.intro}>
   <div data-github-endpoint={GITHUB_API}>
     <ul class="grid gap-4 sm:grid-cols-2">
       {featuredProjects.map((project, i) => (

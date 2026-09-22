@@ -6,6 +6,8 @@ import { absoluteUrl, assetHref, pageHref } from '../../i18n/utils';
 
 interface Props {
   locale: Locale;
+  /** BCP 47 etiketi — og:locale bununla tutarlı kalsın diye. */
+  htmlLang: string;
   page: PageKey;
   title: string;
   description: string;
@@ -14,7 +16,7 @@ interface Props {
   noindex?: boolean;
 }
 
-const { locale, page, title, description, ogImageAlt, noindex = false } = Astro.props;
+const { locale, htmlLang, page, title, description, ogImageAlt, noindex = false } = Astro.props;
 
 const path = pageHref(locale, page);
 const canonical = absoluteUrl(path, Astro.site);
@@ -81,7 +83,7 @@ const csp = [
 
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content={site.name} />
-<meta property="og:locale" content={locale === 'tr' ? 'tr_TR' : 'en_US'} />
+<meta property="og:locale" content={htmlLang.replace('-', '_')} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonical} />

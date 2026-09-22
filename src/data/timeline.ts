@@ -65,7 +65,14 @@ export const education = [
 
 export type EducationId = (typeof education)[number]['id'];
 
-/** Siber Güvenlik Topluluğu'ndaki ilerleme — rol adları content dosyalarında. */
+/**
+ * Siber Güvenlik Topluluğu'ndaki ilerleme — rol adları content dosyalarında.
+ *
+ * DİKKAT: bu dizi ESKİDEN YENİYE sıralı; yukarıdaki `experience` ve `education`
+ * ise yeniden eskiye. Bu yüzden "şu anki rol" konumdan (son eleman) değil
+ * `currentVolunteeringId` ile TARİHTEN türetilir — sıralama değişirse
+ * vurgulanan adım yanlışa kaymasın diye.
+ */
 export const volunteering = [
   { id: 'member', since: '2023-10' },
   { id: 'board', since: '2024-09' },
@@ -73,3 +80,8 @@ export const volunteering = [
 ] as const satisfies readonly VolunteeringStep[];
 
 export type VolunteeringId = (typeof volunteering)[number]['id'];
+
+/** En güncel gönüllülük adımı — dizinin sıralamasından bağımsız. */
+export const currentVolunteeringId: VolunteeringId = volunteering.reduce((latest, step) =>
+  step.since > latest.since ? step : latest,
+).id;

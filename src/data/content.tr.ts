@@ -63,7 +63,7 @@ export const tr = {
     ctaLinkedin: 'LinkedIn',
     ctaCv: 'CV indir',
     statusLabel: 'Dil',
-    statusValue: 'Türkçe · English (B1–B2)',
+    statusValue: 'Türkçe · İngilizce (B1–B2)',
   },
 
   about: {
@@ -74,7 +74,7 @@ export const tr = {
       'Üretim olaylarına müdahaleyi ben yürütüyorum — Proxmox LVM thin-pool tükenmesi, Redis AOF bozulması, MySQL 8 fiziksel restore, Kafka offset kurtarma, çok kiracılı Docker stack arızaları. Şu an OSCP+, CKA ve CKS’e hazırlanıyorum.',
     ],
     languagesLabel: 'Diller',
-    languages: ['Türkçe — ana dil', 'English — CEFR B1–B2'],
+    languages: ['Türkçe — ana dil', 'İngilizce — CEFR B1–B2'],
   },
 
   experience: {
@@ -254,7 +254,7 @@ export const tr = {
     volunteeringRoles: {
       member: 'Üye',
       board: 'Yönetim Kurulu Üyesi',
-      lead: 'Başkan',
+      lead: 'Yönetici',
     },
     volunteeringNote:
       'Yıllık etkinlik programının planlanması, yönetim kurulunun koordinasyonu, topluluğun üniversite içinde temsili ve öğrencilere güvenlik temellerini tanıtan uygulamalı teknik atölyeler.',

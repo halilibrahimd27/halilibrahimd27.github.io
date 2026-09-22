@@ -8,14 +8,13 @@ import Section from '../ui/Section.astro';
 interface Props {
   content: SiteContent;
   locale: Locale;
-  index: number;
 }
 
-const { content, locale, index } = Astro.props;
+const { content, locale } = Astro.props;
 const { ui } = content;
 ---
 
-<Section id="experience" index={index} heading={content.experience.heading}>
+<Section id="experience" heading={content.experience.heading}>
   <ol class="relative">
     {experience.map((entry, i) => {
       const copy = content.experience.items[entry.id];

@@ -21,14 +21,17 @@ function buttons(): NodeListOf<HTMLButtonElement> {
   return document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]');
 }
 
-/** Buton etiketi "geçilecek" temayı anlatır, mevcut olanı değil. */
+/**
+ * Butonun erişilebilir ADI sabit kalır ("Tema"), DURUMU aria-pressed ile
+ * bildirilir. Önceki sürümde ad sessizce değişiyordu: ekran okuyucu basma
+ * sonrası hiçbir şey duyurmuyor, kullanıcı temanın değişip değişmediğini
+ * anlayamıyordu.
+ */
 function syncButtons(): void {
   const current = effectiveTheme();
-  const next: Theme = current === 'dark' ? 'light' : 'dark';
 
   for (const button of buttons()) {
-    const label = next === 'light' ? button.dataset.labelLight : button.dataset.labelDark;
-    if (label) button.setAttribute('aria-label', label);
+    button.setAttribute('aria-pressed', current === 'dark' ? 'true' : 'false');
     button.dataset.theme = current;
   }
 }
@@ -41,6 +44,52 @@ function setTheme(theme: Theme): void {
     /* storage kapalıysa tema yine de bu oturum için geçerli olur */
   }
   syncButtons();
+  syncThemeColor(theme);
+}
+
+/**
+ * Mobil tarayıcı çubuğunun rengi.
+ *
+ * Sayfa iki `<meta name="theme-color" media="...">` ile gelir; bunlar SİSTEM
+ * temasını izler. Kullanıcı sayfa içinden temayı değiştirdiğinde çubuk
+ * sayfayla çelişiyordu. İlk tercihte media'ya bağlı olanları kaldırıp
+ * media'sız tek bir meta devralıyor.
+ */
+const themeColors: Record<Theme, string> = { light: '', dark: '' };
+
+for (const meta of document.querySelectorAll<HTMLMetaElement>('meta[name="theme-color"][media]')) {
+  if (meta.media.includes('light')) themeColors.light = meta.content;
+  if (meta.media.includes('dark')) themeColors.dark = meta.content;
+}
+
+function syncThemeColor(theme: Theme): void {
+  const value = themeColors[theme];
+  if (!value) return;
+
+  for (const meta of document.querySelectorAll('meta[name="theme-color"][media]')) {
+    meta.remove();
+  }
+
+  let meta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]:not([media])');
+  if (!meta) {
+    meta = document.createElement('meta');
+    meta.name = 'theme-color';
+    document.head.appendChild(meta);
+  }
+  meta.content = value;
+}
+
+/**
+ * MediaQueryList.addEventListener iOS 13 ve altında yok. Korumasız bırakılırsa
+ * burada atılan TypeError aynı bundle'daki nav.ts'i de öldürüyor ve sayfa
+ * bomboş açılıyordu.
+ */
+function onSystemThemeChange(handler: () => void): void {
+  if (typeof lightQuery.addEventListener === 'function') {
+    lightQuery.addEventListener('change', handler);
+  } else if (typeof lightQuery.addListener === 'function') {
+    lightQuery.addListener(handler);
+  }
 }
 
 for (const button of buttons()) {
@@ -50,7 +99,7 @@ for (const button of buttons()) {
 }
 
 /* Kullanıcı kendi tercihini kaydetmediyse sistem değişimini anlık yansıt. */
-lightQuery.addEventListener('change', () => {
+onSystemThemeChange(() => {
   if (!root.hasAttribute('data-theme')) syncButtons();
 });
 

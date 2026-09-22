@@ -1,22 +1,21 @@
 ---
 import type { Locale } from '../../data/types';
 import type { SiteContent } from '../../data';
-import { education, volunteering } from '../../data/timeline';
+import { currentVolunteeringId, education, volunteering } from '../../data/timeline';
 import { formatMonth, formatPeriod, machineDate } from '../../i18n/utils';
 import Section from '../ui/Section.astro';
 
 interface Props {
   content: SiteContent;
   locale: Locale;
-  index: number;
 }
 
-const { content, locale, index } = Astro.props;
+const { content, locale } = Astro.props;
 const { ui } = content;
 const copy = content.education;
 ---
 
-<Section id="education" index={index} heading={copy.heading}>
+<Section id="education" heading={copy.heading}>
   <div class="grid gap-10 lg:grid-cols-2 lg:gap-16">
     <div class="space-y-10">
       {/* Eğitim */}
@@ -77,13 +76,13 @@ const copy = content.education;
       <h4 class="mb-4 text-[15px]">{copy.volunteeringOrg}</h4>
 
       <ol class="mb-4">
-        {volunteering.map((step, i) => (
+        {volunteering.map((step) => (
           <li class="relative border-l border-[var(--color-line)] pb-4 pl-5 last:pb-0">
             <span
               aria-hidden="true"
               class:list={[
                 'absolute top-2 -left-[4.5px] h-2 w-2 rounded-[1px]',
-                i === volunteering.length - 1 ? 'bg-accent' : 'bg-[var(--color-line-strong)]',
+                step.id === currentVolunteeringId ? 'bg-accent' : 'bg-[var(--color-line-strong)]',
               ]}
             />
             <p class="meta">
