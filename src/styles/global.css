@@ -8,8 +8,11 @@
  *   1) JS yokken  → @media (prefers-color-scheme: light)
  *   2) JS varken  → <html data-theme="light">  (theme-init.js, senkron)
  *
- * Accent (#4ADE80) açık temada METİN olarak kullanılamaz (beyaz üstünde 1.7:1).
- * Bu yüzden iki token var: --color-accent dekoratif, --color-accent-fg metin.
+ * Accent (#4ADE80) beyaz üstünde 1.7:1 — açık temada ne metin ne de DURUM
+ * taşıyan bir işaret olarak kullanılabilir. Bu yüzden açık temada hem
+ * --color-accent hem --color-accent-fg #15803D'ye (≈5:1) iner; koyu temada
+ * ikisi de parlak yeşil kalır. Ayrım korunuyor çünkü ileride yalnızca
+ * dekoratif bir tonu ayrıştırmak gerekebilir.
  * ──────────────────────────────────────────────────────────────────────────── */
 
 @theme {
@@ -32,6 +35,8 @@
   /* Buton/kontrol kenarlığı — hairline'dan ayrı çünkü WCAG 1.4.11 arayüz
      bileşeni sınırları için 3:1 istiyor; --color-line dekoratif ayraçlar için. */
   --color-control: #646e7a;
+  --color-selection-bg: #4ade80;
+  --color-selection-fg: #0b0e11;
 
   /* İçerik genişliği — 1100px */
   --container-content: 68.75rem;
@@ -55,11 +60,16 @@
     --color-text: #0b0e11;
     --color-muted: #4a5560;
     --color-faint: #5a6672;
-    --color-accent: #4ade80;
+    /* Açık temada dekoratif accent de koyulaşır: #4ADE80 beyaz üstünde
+       1.7:1 kalıyor ve zaman çizelgesi noktaları, birincil buton kenarlığı,
+       marka karesi gibi DURUM taşıyan öğeler algılanamıyordu. */
+    --color-accent: #15803d;
     --color-accent-fg: #15803d;
     --color-accent-soft: rgb(21 128 61 / 0.08);
     --color-ring: #15803d;
     --color-control: #7a8490;
+    --color-selection-bg: #15803d;
+    --color-selection-fg: #ffffff;
   }
 }
 
@@ -73,11 +83,13 @@
   --color-text: #0b0e11;
   --color-muted: #4a5560;
   --color-faint: #5a6672;
-  --color-accent: #4ade80;
+  --color-accent: #15803d;
   --color-accent-fg: #15803d;
   --color-accent-soft: rgb(21 128 61 / 0.08);
   --color-ring: #15803d;
   --color-control: #7a8490;
+  --color-selection-bg: #15803d;
+  --color-selection-fg: #ffffff;
 }
 
 /* Koyu tema — kullanıcı toggle ile seçtiyse (sistem açık olsa bile) */
@@ -95,6 +107,8 @@
   --color-accent-soft: rgb(74 222 128 / 0.1);
   --color-ring: #4ade80;
   --color-control: #646e7a;
+  --color-selection-bg: #4ade80;
+  --color-selection-fg: #0b0e11;
 }
 
 /* ─── Temel katman ───────────────────────────────────────────────────────── */
@@ -151,8 +165,8 @@
   }
 
   ::selection {
-    background-color: var(--color-accent);
-    color: #0b0e11;
+    background-color: var(--color-selection-bg);
+    color: var(--color-selection-fg);
   }
 
   /* Hareket azaltma tercihi: TÜM animasyon ve geçişler kapanır */

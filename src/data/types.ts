@@ -144,11 +144,14 @@ export interface Content<
     readonly positioning: string;
     readonly locationLabel: string;
     readonly location: string;
+    /** Hero'nun sağındaki "Şu an" kartı — değerler timeline/CV'den türer. */
+    readonly nowHeading: string;
+    readonly roleLabel: string;
+    readonly companyLabel: string;
+    readonly prepLabel: string;
     readonly ctaGithub: string;
     readonly ctaLinkedin: string;
     readonly ctaCv: string;
-    readonly statusLabel: string;
-    readonly statusValue: string;
   };
 
   readonly about: {
