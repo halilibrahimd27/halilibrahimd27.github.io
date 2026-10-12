@@ -94,6 +94,9 @@ function card(name: string, role: string, tagline: string, footer: string): Node
     {
       width: 1200,
       height: 630,
+      /* satori ≥0.4x padding'i boyuta EKLİYOR (content-box): kart 1344×758
+         çiziliyor, 1200×630'a kırpılınca alt kimlik satırı kayboluyordu. */
+      boxSizing: 'border-box',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-between',

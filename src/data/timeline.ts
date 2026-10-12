@@ -10,10 +10,17 @@ import type { EducationFacts, ExperienceFacts, VolunteeringStep } from './types'
  */
 export const experience = [
   {
+    id: 'inonu-security',
+    org: 'İnönü Üniversitesi · Dijital Dönüşüm Ofisi',
+    start: '2026-10',
+    end: null,
+    location: 'Malatya, Türkiye',
+  },
+  {
     id: 'ayssoft',
     org: 'Ayssoft Bilgi Teknolojileri',
     start: '2025-05',
-    end: null,
+    end: '2026-10',
     location: 'Malatya, Türkiye',
   },
   {

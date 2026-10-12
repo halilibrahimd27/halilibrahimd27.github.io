@@ -13,10 +13,10 @@ export const en = {
   meta: {
     locale: 'en',
     htmlLang: 'en-GB',
-    title: 'Halil İbrahim Dürmüş — DevSecOps Engineer',
+    title: 'Halil İbrahim Dürmüş — Cyber Security Specialist · DevSecOps',
     description:
-      'DevSecOps Engineer. Proxmox and Docker infrastructure, GitOps-based CI/CD pipelines, defence layers that reach from pre-commit to runtime.',
-    ogImageAlt: 'Halil İbrahim Dürmüş — DevSecOps Engineer',
+      'Cyber Security Specialist · DevSecOps. Proxmox and Docker infrastructure, GitOps-based CI/CD pipelines, defence layers that reach from pre-commit to runtime.',
+    ogImageAlt: 'Halil İbrahim Dürmüş — Cyber Security Specialist · DevSecOps',
     ogTagline: 'Secure software delivery · Durable operations · Offensive mindset',
     usesTitle: 'Uses — Halil İbrahim Dürmüş',
     usesDescription:
@@ -54,26 +54,25 @@ export const en = {
 
   hero: {
     name: 'Halil İbrahim Dürmüş',
-    role: 'DevSecOps Engineer',
+    role: 'Cyber Security Specialist · DevSecOps',
     positioning:
-      'I run production-scale Proxmox and Docker infrastructure, and I own the defence layers that reach from pre-commit to runtime along with the GitOps-based CI/CD pipelines that carry them. My focus is secure software delivery (SAST/SCA/SBOM, signed images), durable operations (SLOs, blameless postmortems, runbook hygiene) and an offensive mindset.',
+      'I have run production-scale Proxmox and Docker infrastructure and owned, end to end, the defence layers that reach from pre-commit to runtime along with the GitOps-based CI/CD pipelines that carry them. My focus is secure software delivery (SAST/SCA/SBOM, signed images), durable operations (SLOs, blameless postmortems, runbook hygiene) and an offensive mindset.',
     locationLabel: 'Location',
-    location: 'Türkiye · Remote (UTC+3)',
+    location: 'Türkiye · Open to relocation',
     nowHeading: 'Now',
     roleLabel: 'Role',
-    companyLabel: 'Company',
+    companyLabel: 'Organisation',
     prepLabel: 'In preparation',
     ctaGithub: 'GitHub',
     ctaLinkedin: 'LinkedIn',
-    ctaCv: 'Download CV',
   },
 
   about: {
     heading: 'About',
     paragraphs: [
-      'At Ayssoft I am the company’s only DevOps engineer: the entire delivery chain from commit to production is mine. I have provisioned and now operate more than 100 virtual machines across multiple Proxmox nodes, and over 90 container-based repositories are built and deployed with GitHub Actions.',
+      'I am a cyber security specialist at İnönü University’s Digital Transformation Office. Before that I was Ayssoft’s only DevOps engineer and owned the entire delivery chain from commit to production: I provisioned and operated more than 100 virtual machines across multiple Proxmox nodes, and over 90 container-based repositories were built and deployed with GitHub Actions.',
       'I came to infrastructure from full-stack Java and React development, and that shapes how I work: I build hardening, secret management and observability that development teams adopt rather than route around.',
-      'I lead production incident response — Proxmox LVM thin-pool exhaustion, Redis AOF corruption, MySQL 8 physical restores, Kafka offset recovery, multi-tenant Docker stack failures. I am currently preparing for OSCP+ and CKS.',
+      'I led Ayssoft’s production incident response — Proxmox LVM thin-pool exhaustion, Redis AOF corruption, MySQL 8 physical restores, Kafka offset recovery, multi-tenant Docker stack failures. I am currently preparing for OSCP+ and CKS.',
     ],
     languagesLabel: 'Languages',
     languages: ['Turkish — native', 'English — CEFR B1–B2'],
@@ -82,6 +81,11 @@ export const en = {
   experience: {
     heading: 'Experience',
     items: {
+      'inonu-security': {
+        role: 'Cyber Security Specialist',
+        summary: 'Rejoined the office in a dedicated cyber security role.',
+        bullets: [],
+      },
       ayssoft: {
         role: 'DevSecOps Engineer',
         summary:
@@ -169,6 +173,10 @@ export const en = {
       'wakapi-admin': {
         tagline:
           'Self-hosted Wakapi stack with a custom Flask admin panel. Real-time active users, a domain tag system, AI editor detection (Cursor/Copilot/Claude Code/Codeium), PDF reports and a team leaderboard; Prometheus + Grafana included.',
+      },
+      domainscope: {
+        tagline:
+          'Open-source SSL & DNS toolkit that runs entirely in the browser. Collects a domain’s subdomains from several sources, flags hosts behind Cloudflare and matches the answers against your own server inventory to show exactly which servers a certificate must be installed on. Global DNS, bulk resolve, IP intel, domain health and a Python origin-scan CLI.',
       },
       'goad-light-vmware-windows': {
         tagline:
@@ -277,7 +285,6 @@ export const en = {
     emailPending: 'Coming soon',
     githubLabel: 'GitHub',
     linkedinLabel: 'LinkedIn',
-    cvLabel: 'CV (PDF)',
   },
 
   uses: {

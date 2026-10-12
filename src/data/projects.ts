@@ -81,12 +81,13 @@ export const projects = [
     updated: '2026-06-11',
   },
   {
-    id: 'goad-light-vmware-windows',
-    repo: 'halilibrahimd27/goad-light-vmware-windows',
-    tech: ['PowerShell', 'Active Directory', 'VMware', 'Red team'],
+    id: 'domainscope',
+    repo: 'halilibrahimd27/domainscope',
+    tech: ['JavaScript', 'DNS / DoH', 'SSL / TLS', 'Python CLI'],
     tier: 'featured',
-    stars: 1,
-    updated: '2026-09-12',
+    homepage: 'https://halilibrahimd27.github.io/domainscope/',
+    stars: 0,
+    updated: '2026-10-09',
   },
 
   /* ─── Diğer projeler (kompakt liste) ─────────────────────────────────── */
@@ -147,6 +148,14 @@ export const projects = [
     tier: 'hidden',
     stars: 0,
     updated: '2025-12-24',
+  },
+  {
+    id: 'goad-light-vmware-windows',
+    repo: 'halilibrahimd27/goad-light-vmware-windows',
+    tech: ['PowerShell', 'Active Directory', 'VMware', 'Red team'],
+    tier: 'hidden',
+    stars: 1,
+    updated: '2026-09-12',
   },
 ] as const satisfies readonly ProjectFacts[];
 

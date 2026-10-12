@@ -14,10 +14,10 @@ export const tr = {
   meta: {
     locale: 'tr',
     htmlLang: 'tr-TR',
-    title: 'Halil İbrahim Dürmüş — DevSecOps Engineer',
+    title: 'Halil İbrahim Dürmüş — Cyber Security Specialist · DevSecOps',
     description:
-      'DevSecOps Engineer. Proxmox ve Docker altyapıları, GitOps tabanlı CI/CD hatları, pre-commit’ten runtime’a uzanan savunma katmanları.',
-    ogImageAlt: 'Halil İbrahim Dürmüş — DevSecOps Engineer',
+      'Cyber Security Specialist · DevSecOps. Proxmox ve Docker altyapıları, GitOps tabanlı CI/CD hatları, pre-commit’ten runtime’a uzanan savunma katmanları.',
+    ogImageAlt: 'Halil İbrahim Dürmüş — Cyber Security Specialist · DevSecOps',
     ogTagline: 'Güvenli yazılım teslimi · Dayanıklı operasyon · Ofansif bakış',
     usesTitle: 'Kullandıklarım — Halil İbrahim Dürmüş',
     usesDescription: 'Günlük işimde kullandığım altyapı, teslim hattı ve güvenlik araçları.',
@@ -54,26 +54,25 @@ export const tr = {
 
   hero: {
     name: 'Halil İbrahim Dürmüş',
-    role: 'DevSecOps Engineer',
+    role: 'Cyber Security Specialist · DevSecOps',
     positioning:
-      'Production ölçekli Proxmox ve Docker altyapılarını işleten, pre-commit’ten runtime’a uzanan savunma katmanlarını ve GitOps tabanlı CI/CD hatlarını uçtan uca sahiplenen bir mühendisim. Odağım güvenli yazılım teslimi (SAST/SCA/SBOM, imzalı imaj), dayanıklı operasyon (SLO, suçlusuz postmortem, runbook hijyeni) ve ofansif bakış açısı.',
+      'Production ölçekli Proxmox ve Docker altyapılarını işletmiş, pre-commit’ten runtime’a uzanan savunma katmanlarını ve GitOps tabanlı CI/CD hatlarını uçtan uca sahiplenmiş bir mühendisim. Odağım güvenli yazılım teslimi (SAST/SCA/SBOM, imzalı imaj), dayanıklı operasyon (SLO, suçlusuz postmortem, runbook hijyeni) ve ofansif bakış açısı.',
     locationLabel: 'Konum',
-    location: 'Türkiye · Remote (UTC+3)',
+    location: 'Türkiye · Taşınmaya açık',
     nowHeading: 'Şu an',
     roleLabel: 'Rol',
-    companyLabel: 'Şirket',
+    companyLabel: 'Kurum',
     prepLabel: 'Hazırlık',
     ctaGithub: 'GitHub',
     ctaLinkedin: 'LinkedIn',
-    ctaCv: 'CV indir',
   },
 
   about: {
     heading: 'Hakkımda',
     paragraphs: [
-      'Ayssoft’ta şirketin tek DevOps mühendisiyim: commit’ten production’a kadar bütün teslim zinciri bende. Çoklu Proxmox node üzerinde bugüne kadar 100’den fazla sanal makine kurdum ve işletiyorum; 90’dan fazla container tabanlı repository GitHub Actions ile build edilip dağıtılıyor.',
+      'İnönü Üniversitesi Dijital Dönüşüm Ofisi’nde siber güvenlik uzmanıyım. Öncesinde Ayssoft’ta şirketin tek DevOps mühendisiydim ve commit’ten production’a kadar bütün teslim zinciri bendeydi: çoklu Proxmox node üzerinde 100’den fazla sanal makine kurup işlettim, 90’dan fazla container tabanlı repository GitHub Actions ile build edilip dağıtıldı.',
       'Altyapıya full-stack Java ve React geliştiriciliğinden geldim. Bu, nasıl çalıştığımı belirliyor: geliştirme ekiplerinin etrafından dolaşacağı değil, benimseyeceği sertleştirme, secret yönetimi ve gözlemlenebilirlik kuruyorum.',
-      'Üretim olaylarına müdahaleyi ben yürütüyorum — Proxmox LVM thin-pool tükenmesi, Redis AOF bozulması, MySQL 8 fiziksel restore, Kafka offset kurtarma, çok kiracılı Docker stack arızaları. Şu an OSCP+ ve CKS’e hazırlanıyorum.',
+      'Ayssoft’ta üretim olaylarına müdahaleyi ben yürüttüm — Proxmox LVM thin-pool tükenmesi, Redis AOF bozulması, MySQL 8 fiziksel restore, Kafka offset kurtarma, çok kiracılı Docker stack arızaları. Şu an OSCP+ ve CKS’e hazırlanıyorum.',
     ],
     languagesLabel: 'Diller',
     languages: ['Türkçe — ana dil', 'İngilizce — CEFR B1–B2'],
@@ -82,6 +81,11 @@ export const tr = {
   experience: {
     heading: 'Deneyim',
     items: {
+      'inonu-security': {
+        role: 'Cyber Security Specialist',
+        summary: 'Ofise bu kez doğrudan siber güvenliğe ayrılmış bir rolle geri dönüş.',
+        bullets: [],
+      },
       ayssoft: {
         role: 'DevSecOps Engineer',
         summary: 'Şirketin tek DevOps mühendisi; commit’ten production’a teslim zincirinin sahibi.',
@@ -167,6 +171,10 @@ export const tr = {
       'wakapi-admin': {
         tagline:
           'Self-hosted Wakapi stack’i ve özel Flask admin paneli. Realtime aktif kullanıcılar, domain etiket sistemi, AI editör tespiti (Cursor/Copilot/Claude Code/Codeium), PDF rapor, takım liderlik tablosu; Prometheus + Grafana ile.',
+      },
+      domainscope: {
+        tagline:
+          'Tamamen tarayıcıda çalışan açık kaynak SSL & DNS araç seti. Bir domain’in alt alan adlarını birkaç kaynaktan toplar, Cloudflare arkasındaki host’ları ayırır ve cevapları kendi sunucu envanterinizle eşleştirip sertifikanın tam olarak hangi sunuculara kurulacağını gösterir. Global DNS, toplu çözümleme, IP intel, domain sağlığı ve Python origin-scan CLI.',
       },
       'goad-light-vmware-windows': {
         tagline:
@@ -275,7 +283,6 @@ export const tr = {
     emailPending: 'Yakında eklenecek',
     githubLabel: 'GitHub',
     linkedinLabel: 'LinkedIn',
-    cvLabel: 'CV (PDF)',
   },
 
   uses: {

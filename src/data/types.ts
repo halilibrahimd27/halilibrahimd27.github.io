@@ -144,14 +144,13 @@ export interface Content<
     readonly positioning: string;
     readonly locationLabel: string;
     readonly location: string;
-    /** Hero'nun sağındaki "Şu an" kartı — değerler timeline/CV'den türer. */
+    /** Hero'nun sağındaki "Şu an" kartı — değerler timeline'dan türer. */
     readonly nowHeading: string;
     readonly roleLabel: string;
     readonly companyLabel: string;
     readonly prepLabel: string;
     readonly ctaGithub: string;
     readonly ctaLinkedin: string;
-    readonly ctaCv: string;
   };
 
   readonly about: {
@@ -206,7 +205,6 @@ export interface Content<
     readonly emailPending: string;
     readonly githubLabel: string;
     readonly linkedinLabel: string;
-    readonly cvLabel: string;
   };
 
   readonly uses: {

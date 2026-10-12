@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="public/og/og-tr.png" alt="Halil İbrahim Dürmüş — DevSecOps Engineer" width="820">
+<img src="public/og/og-tr.png" alt="Halil İbrahim Dürmüş — Cyber Security Specialist · DevSecOps" width="820">
 
 ### [halilibrahimd27.github.io](https://halilibrahimd27.github.io/)
 

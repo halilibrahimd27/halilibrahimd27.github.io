@@ -1,7 +1,6 @@
 ---
 import type { SiteContent } from '../../data';
-import { EMAIL, hasCv, isEmailConfigured, site, toHtmlEntities } from '../../data/site';
-import { assetHref } from '../../i18n/utils';
+import { EMAIL, isEmailConfigured, site, toHtmlEntities } from '../../data/site';
 import ExternalLink from '../ui/ExternalLink.astro';
 import Section from '../ui/Section.astro';
 
@@ -63,18 +62,5 @@ const emailAnchor = isEmailConfigured
         linkedin.com/in/{site.linkedin.handle}
       </ExternalLink>
     </dd>
-
-    {hasCv && (
-      <>
-        <dt class="text-faint border-t border-[var(--color-line)] pt-4 font-mono text-[11px] tracking-[0.14em] uppercase sm:pb-4">
-          {contact.cvLabel}
-        </dt>
-        <dd class="border-[var(--color-line)] pb-4 sm:border-t sm:pt-4">
-          <a href={assetHref(site.cvPath)} class="link font-mono text-[14px]" download>
-            {content.hero.ctaCv}
-          </a>
-        </dd>
-      </>
-    )}
   </dl>
 </Section>

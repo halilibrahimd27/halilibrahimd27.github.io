@@ -1,6 +1,3 @@
-import { existsSync } from 'node:fs';
-import { join } from 'node:path';
-
 /**
  * Kimlik ve site geneli sabitler.
  * Buradaki değerler her iki dilde de aynıdır (isim, link, dosya yolu).
@@ -17,15 +14,11 @@ export const EMAIL = 's.ibrahimdrms@gmail.com';
 
 export const isEmailConfigured = EMAIL.trim().length > 0;
 
-/** CV dosya adı — public/cv/ altına koyduğunuzda CTA otomatik görünür. */
-export const CV_FILENAME = 'HALIL_IBRAHIM_DURMUS_CV.pdf';
-
-/**
- * CV linki build sırasında dosya sistemi kontrolü ile belirlenir.
- * Dosya yoksa hero ve iletişim bölümündeki "CV indir" butonu hiç render
- * edilmez — kırık link çıkmaz.
+/*
+ * CV bilerek sitede YOK: PDF telefon numarası içeriyor ve public/ altındaki
+ * her dosya, hiçbir yerden link verilmese bile herkese açık bir URL'dir.
+ * İletişim e-posta ve LinkedIn üzerinden.
  */
-export const hasCv = existsSync(join(process.cwd(), 'public', 'cv', CV_FILENAME));
 
 export const site = {
   name: 'Halil İbrahim Dürmüş',
@@ -42,7 +35,6 @@ export const site = {
     handle: 'halil-ibrahim-durmus',
     url: 'https://www.linkedin.com/in/halil-ibrahim-durmus',
   },
-  cvPath: `cv/${CV_FILENAME}`,
   /** Tema rengi ve accent — CSS token'ları ile aynı olmalı. */
   themeColorDark: '#0B0E11',
   themeColorLight: '#FBFCFD',
