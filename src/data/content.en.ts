@@ -262,15 +262,14 @@ export const en = {
       msc: { degree: 'MSc — Software Engineering', note: 'Thesis track' },
       bsc: { degree: 'BSc — Software Engineering' },
     },
-    volunteeringOrg: 'İnönü University Cyber Security Society',
+    volunteeringOrg: 'İnönü University Cyber Security Community',
     volunteeringRoles: {
       member: 'Member',
       board: 'Board Member',
-      lead: 'President',
-      handover: 'Remote support',
+      lead: 'Manager',
     },
     volunteeringNote:
-      'As president I planned the community’s annual activity programme, coordinated the board, represented the community within the university, and ran hands-on technical workshops introducing students to security fundamentals. I handed the role over in September 2026 and continue to support the community remotely.',
+      'As manager I plan the community’s annual activity programme, coordinate the board, represent the community within the university and run hands-on technical workshops introducing students to security fundamentals.',
     certifications: [
       { name: 'OSCP+', full: 'OffSec Certified Professional' },
       { name: 'CKS', full: 'Certified Kubernetes Security Specialist' },
