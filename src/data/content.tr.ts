@@ -70,9 +70,9 @@ export const tr = {
   about: {
     heading: 'Hakkımda',
     paragraphs: [
-      'İnönü Üniversitesi Dijital Dönüşüm Ofisi’nde siber güvenlik uzmanıyım. Öncesinde Ayssoft’ta şirketin tek DevOps mühendisiydim ve commit’ten production’a kadar bütün teslim zinciri bendeydi: çoklu Proxmox node üzerinde 100’den fazla sanal makine kurup işlettim, 90’dan fazla container tabanlı repository GitHub Actions ile build edilip dağıtıldı.',
+      'İnönü Üniversitesi Dijital Dönüşüm Ofisi’nde siber güvenlik uzmanıyım. Önceki çalıştığım firmada tek DevOps mühendisiydim ve commit’ten production’a kadar bütün teslim zinciri bendeydi: çoklu Proxmox node üzerinde 100’den fazla sanal makine kurup işlettim, 90’dan fazla container tabanlı repository GitHub Actions ile build edilip dağıtıldı.',
       'Altyapıya full-stack Java ve React geliştiriciliğinden geldim. Bu, nasıl çalıştığımı belirliyor: geliştirme ekiplerinin etrafından dolaşacağı değil, benimseyeceği sertleştirme, secret yönetimi ve gözlemlenebilirlik kuruyorum.',
-      'Ayssoft’ta üretim olaylarına müdahaleyi ben yürüttüm — Proxmox LVM thin-pool tükenmesi, Redis AOF bozulması, MySQL 8 fiziksel restore, Kafka offset kurtarma, çok kiracılı Docker stack arızaları. Şu an OSCP+ ve CKS’e hazırlanıyorum.',
+      'Aynı firmada üretim olaylarına müdahaleyi ben yürüttüm — Proxmox LVM thin-pool tükenmesi, Redis AOF bozulması, MySQL 8 fiziksel restore, Kafka offset kurtarma, çok kiracılı Docker stack arızaları. Şu an OSCP+ ve CKS’e hazırlanıyorum.',
     ],
     languagesLabel: 'Diller',
     languages: ['Türkçe — ana dil', 'İngilizce — CEFR B1–B2'],

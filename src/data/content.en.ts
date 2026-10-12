@@ -70,9 +70,9 @@ export const en = {
   about: {
     heading: 'About',
     paragraphs: [
-      'I am a cyber security specialist at İnönü University’s Digital Transformation Office. Before that I was Ayssoft’s only DevOps engineer and owned the entire delivery chain from commit to production: I provisioned and operated more than 100 virtual machines across multiple Proxmox nodes, and over 90 container-based repositories were built and deployed with GitHub Actions.',
+      'I am a cyber security specialist at İnönü University’s Digital Transformation Office. Before that I was the only DevOps engineer at my previous company and owned the entire delivery chain from commit to production: I provisioned and operated more than 100 virtual machines across multiple Proxmox nodes, and over 90 container-based repositories were built and deployed with GitHub Actions.',
       'I came to infrastructure from full-stack Java and React development, and that shapes how I work: I build hardening, secret management and observability that development teams adopt rather than route around.',
-      'I led Ayssoft’s production incident response — Proxmox LVM thin-pool exhaustion, Redis AOF corruption, MySQL 8 physical restores, Kafka offset recovery, multi-tenant Docker stack failures. I am currently preparing for OSCP+ and CKS.',
+      'At the same company I led production incident response — Proxmox LVM thin-pool exhaustion, Redis AOF corruption, MySQL 8 physical restores, Kafka offset recovery, multi-tenant Docker stack failures. I am currently preparing for OSCP+ and CKS.',
     ],
     languagesLabel: 'Languages',
     languages: ['Turkish — native', 'English — CEFR B1–B2'],
